@@ -13,7 +13,7 @@
       "docCount": 427,
       "likeSum": 3424,
       "avgLikes": 8.0,
-      "weight": 1622.55
+      "weight": 130.91
     },
     {
       "text": "지하철",
@@ -21,7 +21,7 @@
       "docCount": 191,
       "likeSum": 3228,
       "avgLikes": 16.9,
-      "weight": 800.5
+      "weight": 105.31
     },
     {
       "text": "무임승차",
@@ -29,7 +29,7 @@
       "docCount": 167,
       "likeSum": 3454,
       "avgLikes": 20.7,
-      "weight": 661.09
+      "weight": 98.86
     },
     {
       "text": "할인",
@@ -37,15 +37,7 @@
       "docCount": 116,
       "likeSum": 2946,
       "avgLikes": 25.4,
-      "weight": 484.89
-    },
-    {
-      "text": "무료",
-      "count": 157,
-      "docCount": 128,
-      "likeSum": 1159,
-      "avgLikes": 9.1,
-      "weight": 446.89
+      "weight": 87.36
     },
     {
       "text": "시간",
@@ -53,7 +45,7 @@
       "docCount": 109,
       "likeSum": 1952,
       "avgLikes": 17.9,
-      "weight": 442.42
+      "weight": 79.04
     },
     {
       "text": "요금",
@@ -61,15 +53,7 @@
       "docCount": 90,
       "likeSum": 1728,
       "avgLikes": 19.2,
-      "weight": 418.76
-    },
-    {
-      "text": "적자",
-      "count": 128,
-      "docCount": 95,
-      "likeSum": 1225,
-      "avgLikes": 12.9,
-      "weight": 397.47
+      "weight": 77.76
     },
     {
       "text": "출퇴근",
@@ -77,7 +61,23 @@
       "docCount": 107,
       "likeSum": 1846,
       "avgLikes": 17.3,
-      "weight": 388.84
+      "weight": 73.65
+    },
+    {
+      "text": "적자",
+      "count": 128,
+      "docCount": 95,
+      "likeSum": 1225,
+      "avgLikes": 12.9,
+      "weight": 70.86
+    },
+    {
+      "text": "무료",
+      "count": 157,
+      "docCount": 128,
+      "likeSum": 1159,
+      "avgLikes": 9.1,
+      "weight": 70.37
     },
     {
       "text": "폐지",
@@ -85,7 +85,7 @@
       "docCount": 139,
       "likeSum": 833,
       "avgLikes": 6.0,
-      "weight": 388.5
+      "weight": 60.29
     },
     {
       "text": "승차",
@@ -93,47 +93,7 @@
       "docCount": 71,
       "likeSum": 712,
       "avgLikes": 10.0,
-      "weight": 224.87
-    },
-    {
-      "text": "버스",
-      "count": 62,
-      "docCount": 51,
-      "likeSum": 560,
-      "avgLikes": 11.0,
-      "weight": 185.17
-    },
-    {
-      "text": "이용",
-      "count": 56,
-      "docCount": 44,
-      "likeSum": 651,
-      "avgLikes": 14.8,
-      "weight": 179.64
-    },
-    {
-      "text": "무임",
-      "count": 83,
-      "docCount": 73,
-      "likeSum": 238,
-      "avgLikes": 3.3,
-      "weight": 179.24
-    },
-    {
-      "text": "이준석",
-      "count": 55,
-      "docCount": 48,
-      "likeSum": 653,
-      "avgLikes": 13.6,
-      "weight": 172.98
-    },
-    {
-      "text": "통과",
-      "count": 49,
-      "docCount": 46,
-      "likeSum": 754,
-      "avgLikes": 16.4,
-      "weight": 160.95
+      "weight": 50.9
     },
     {
       "text": "필요",
@@ -141,47 +101,15 @@
       "docCount": 39,
       "likeSum": 941,
       "avgLikes": 24.1,
-      "weight": 153.91
+      "weight": 48.84
     },
     {
-      "text": "나이",
-      "count": 50,
-      "docCount": 45,
-      "likeSum": 518,
-      "avgLikes": 11.5,
-      "weight": 151.06
-    },
-    {
-      "text": "찬성",
-      "count": 44,
-      "docCount": 42,
-      "likeSum": 610,
-      "avgLikes": 14.5,
-      "weight": 140.53
-    },
-    {
-      "text": "교통",
-      "count": 42,
-      "docCount": 36,
-      "likeSum": 576,
-      "avgLikes": 16.0,
-      "weight": 137.2
-    },
-    {
-      "text": "지원",
-      "count": 40,
-      "docCount": 31,
-      "likeSum": 609,
-      "avgLikes": 19.6,
-      "weight": 136.88
-    },
-    {
-      "text": "의원",
-      "count": 38,
-      "docCount": 35,
-      "likeSum": 867,
-      "avgLikes": 24.8,
-      "weight": 136.78
+      "text": "이용",
+      "count": 56,
+      "docCount": 44,
+      "likeSum": 651,
+      "avgLikes": 14.8,
+      "weight": 48.79
     },
     {
       "text": "가능",
@@ -189,95 +117,71 @@
       "docCount": 30,
       "likeSum": 1043,
       "avgLikes": 34.8,
-      "weight": 135.16
+      "weight": 48.24
     },
     {
-      "text": "어르신",
-      "count": 37,
-      "docCount": 30,
-      "likeSum": 425,
-      "avgLikes": 14.2,
-      "weight": 117.49
-    },
-    {
-      "text": "세대",
-      "count": 44,
-      "docCount": 29,
-      "likeSum": 182,
-      "avgLikes": 6.3,
-      "weight": 113.86
-    },
-    {
-      "text": "제도",
-      "count": 32,
-      "docCount": 28,
-      "likeSum": 634,
-      "avgLikes": 22.6,
-      "weight": 112.97
-    },
-    {
-      "text": "혜택",
-      "count": 68,
-      "docCount": 59,
-      "likeSum": 70,
-      "avgLikes": 1.2,
-      "weight": 110.56
-    },
-    {
-      "text": "이상",
-      "count": 72,
-      "docCount": 65,
-      "likeSum": 53,
-      "avgLikes": 0.8,
-      "weight": 106.35
-    },
-    {
-      "text": "복지",
-      "count": 61,
-      "docCount": 51,
-      "likeSum": 74,
-      "avgLikes": 1.5,
-      "weight": 104.75
-    },
-    {
-      "text": "나라",
+      "text": "이준석",
       "count": 55,
-      "docCount": 43,
-      "likeSum": 88,
-      "avgLikes": 2.0,
-      "weight": 104.02
+      "docCount": 48,
+      "likeSum": 653,
+      "avgLikes": 13.6,
+      "weight": 47.19
     },
     {
-      "text": "금액",
-      "count": 25,
-      "docCount": 20,
-      "likeSum": 654,
-      "avgLikes": 32.7,
-      "weight": 95.35
+      "text": "통과",
+      "count": 49,
+      "docCount": 46,
+      "likeSum": 754,
+      "avgLikes": 16.4,
+      "weight": 46.98
     },
     {
-      "text": "국가",
-      "count": 26,
-      "docCount": 24,
-      "likeSum": 637,
-      "avgLikes": 26.5,
-      "weight": 94.97
+      "text": "버스",
+      "count": 62,
+      "docCount": 51,
+      "likeSum": 560,
+      "avgLikes": 11.0,
+      "weight": 46.98
     },
     {
-      "text": "시간대",
+      "text": "의원",
+      "count": 38,
+      "docCount": 35,
+      "likeSum": 867,
+      "avgLikes": 24.8,
+      "weight": 46.22
+    },
+    {
+      "text": "지원",
+      "count": 40,
+      "docCount": 31,
+      "likeSum": 609,
+      "avgLikes": 19.6,
+      "weight": 44.62
+    },
+    {
+      "text": "교통",
+      "count": 42,
+      "docCount": 36,
+      "likeSum": 576,
+      "avgLikes": 16.0,
+      "weight": 43.2
+    },
+    {
+      "text": "찬성",
       "count": 44,
-      "docCount": 38,
-      "likeSum": 114,
-      "avgLikes": 3.0,
-      "weight": 92.8
+      "docCount": 42,
+      "likeSum": 610,
+      "avgLikes": 14.5,
+      "weight": 43.01
     },
     {
-      "text": "국회",
-      "count": 28,
-      "docCount": 28,
-      "likeSum": 290,
-      "avgLikes": 10.4,
-      "weight": 82.43
+      "text": "나이",
+      "count": 50,
+      "docCount": 45,
+      "likeSum": 518,
+      "avgLikes": 11.5,
+      "weight": 42.8
     },
     {
       "text": "성인",
@@ -285,15 +189,39 @@
       "docCount": 13,
       "likeSum": 1059,
       "avgLikes": 81.5,
-      "weight": 81.54
+      "weight": 41.68
     },
     {
-      "text": "카드",
-      "count": 39,
-      "docCount": 25,
-      "likeSum": 69,
-      "avgLikes": 2.8,
-      "weight": 80.32
+      "text": "제도",
+      "count": 32,
+      "docCount": 28,
+      "likeSum": 634,
+      "avgLikes": 22.6,
+      "weight": 41.44
+    },
+    {
+      "text": "금액",
+      "count": 25,
+      "docCount": 20,
+      "likeSum": 654,
+      "avgLikes": 32.7,
+      "weight": 40.17
+    },
+    {
+      "text": "어르신",
+      "count": 37,
+      "docCount": 30,
+      "likeSum": 425,
+      "avgLikes": 14.2,
+      "weight": 39.16
+    },
+    {
+      "text": "국가",
+      "count": 26,
+      "docCount": 24,
+      "likeSum": 637,
+      "avgLikes": 26.5,
+      "weight": 38.91
     },
     {
       "text": "발의",
@@ -301,7 +229,15 @@
       "docCount": 18,
       "likeSum": 709,
       "avgLikes": 39.4,
-      "weight": 79.18
+      "weight": 37.55
+    },
+    {
+      "text": "무임",
+      "count": 83,
+      "docCount": 73,
+      "likeSum": 238,
+      "avgLikes": 3.3,
+      "weight": 35.52
     },
     {
       "text": "시행",
@@ -309,87 +245,7 @@
       "docCount": 19,
       "likeSum": 566,
       "avgLikes": 29.8,
-      "weight": 74.83
-    },
-    {
-      "text": "경제",
-      "count": 30,
-      "docCount": 25,
-      "likeSum": 125,
-      "avgLikes": 5.0,
-      "weight": 73.0
-    },
-    {
-      "text": "일정",
-      "count": 17,
-      "docCount": 15,
-      "likeSum": 546,
-      "avgLikes": 36.4,
-      "weight": 66.25
-    },
-    {
-      "text": "지급",
-      "count": 16,
-      "docCount": 14,
-      "likeSum": 551,
-      "avgLikes": 39.4,
-      "weight": 63.33
-    },
-    {
-      "text": "장애인",
-      "count": 26,
-      "docCount": 22,
-      "likeSum": 105,
-      "avgLikes": 4.8,
-      "weight": 62.47
-    },
-    {
-      "text": "서울",
-      "count": 16,
-      "docCount": 16,
-      "likeSum": 528,
-      "avgLikes": 33.0,
-      "weight": 61.14
-    },
-    {
-      "text": "일부",
-      "count": 15,
-      "docCount": 14,
-      "likeSum": 592,
-      "avgLikes": 42.3,
-      "weight": 60.21
-    },
-    {
-      "text": "지역",
-      "count": 24,
-      "docCount": 22,
-      "likeSum": 120,
-      "avgLikes": 5.5,
-      "weight": 59.8
-    },
-    {
-      "text": "세금",
-      "count": 31,
-      "docCount": 30,
-      "likeSum": 64,
-      "avgLikes": 2.1,
-      "weight": 59.32
-    },
-    {
-      "text": "적용",
-      "count": 15,
-      "docCount": 15,
-      "likeSum": 552,
-      "avgLikes": 36.8,
-      "weight": 58.59
-    },
-    {
-      "text": "자리",
-      "count": 30,
-      "docCount": 24,
-      "likeSum": 54,
-      "avgLikes": 2.2,
-      "weight": 58.29
+      "weight": 35.13
     },
     {
       "text": "일본",
@@ -397,103 +253,63 @@
       "docCount": 12,
       "likeSum": 1067,
       "avgLikes": 88.9,
-      "weight": 55.19
+      "weight": 34.63
     },
     {
-      "text": "미래",
-      "count": 16,
-      "docCount": 16,
-      "likeSum": 323,
-      "avgLikes": 20.2,
-      "weight": 55.08
-    },
-    {
-      "text": "유료",
-      "count": 25,
-      "docCount": 22,
-      "likeSum": 77,
-      "avgLikes": 3.5,
-      "weight": 55.08
-    },
-    {
-      "text": "법안",
-      "count": 18,
-      "docCount": 14,
-      "likeSum": 162,
-      "avgLikes": 11.6,
-      "weight": 54.45
-    },
-    {
-      "text": "연금",
-      "count": 30,
-      "docCount": 25,
-      "likeSum": 42,
-      "avgLikes": 1.7,
-      "weight": 53.66
-    },
-    {
-      "text": "국민",
-      "count": 16,
-      "docCount": 16,
-      "likeSum": 271,
-      "avgLikes": 16.9,
-      "weight": 52.95
-    },
-    {
-      "text": "제한",
-      "count": 21,
-      "docCount": 18,
-      "likeSum": 92,
-      "avgLikes": 5.1,
-      "weight": 51.41
-    },
-    {
-      "text": "교통비",
-      "count": 22,
-      "docCount": 19,
-      "likeSum": 77,
-      "avgLikes": 4.1,
-      "weight": 50.51
-    },
-    {
-      "text": "정책",
-      "count": 21,
-      "docCount": 21,
-      "likeSum": 96,
-      "avgLikes": 4.6,
-      "weight": 49.86
-    },
-    {
-      "text": "대중교통",
-      "count": 21,
-      "docCount": 20,
-      "likeSum": 90,
-      "avgLikes": 4.5,
-      "weight": 49.64
-    },
-    {
-      "text": "환승",
-      "count": 19,
+      "text": "일정",
+      "count": 17,
       "docCount": 15,
-      "likeSum": 81,
-      "avgLikes": 5.4,
-      "weight": 47.22
+      "likeSum": 546,
+      "avgLikes": 36.4,
+      "weight": 33.99
     },
     {
-      "text": "비용",
-      "count": 23,
-      "docCount": 17,
-      "likeSum": 36,
-      "avgLikes": 2.1,
-      "weight": 43.92
+      "text": "지급",
+      "count": 16,
+      "docCount": 14,
+      "likeSum": 551,
+      "avgLikes": 39.4,
+      "weight": 33.58
     },
     {
-      "text": "전철",
-      "count": 20,
-      "docCount": 18,
-      "likeSum": 58,
-      "avgLikes": 3.2,
-      "weight": 43.05
+      "text": "일부",
+      "count": 15,
+      "docCount": 14,
+      "likeSum": 592,
+      "avgLikes": 42.3,
+      "weight": 33.06
+    },
+    {
+      "text": "세대",
+      "count": 44,
+      "docCount": 29,
+      "likeSum": 182,
+      "avgLikes": 6.3,
+      "weight": 32.96
+    },
+    {
+      "text": "서울",
+      "count": 16,
+      "docCount": 16,
+      "likeSum": 528,
+      "avgLikes": 33.0,
+      "weight": 32.21
+    },
+    {
+      "text": "적용",
+      "count": 15,
+      "docCount": 15,
+      "likeSum": 552,
+      "avgLikes": 36.8,
+      "weight": 32.01
+    },
+    {
+      "text": "국회",
+      "count": 28,
+      "docCount": 28,
+      "likeSum": 290,
+      "avgLikes": 10.4,
+      "weight": 31.01
     },
     {
       "text": "개정안",
@@ -501,39 +317,7 @@
       "docCount": 5,
       "likeSum": 525,
       "avgLikes": 105.0,
-      "weight": 42.58
-    },
-    {
-      "text": "대상",
-      "count": 10,
-      "docCount": 10,
-      "likeSum": 555,
-      "avgLikes": 55.5,
-      "weight": 42.27
-    },
-    {
-      "text": "지모퀴",
-      "count": 12,
-      "docCount": 12,
-      "likeSum": 252,
-      "avgLikes": 21.0,
-      "weight": 41.67
-    },
-    {
-      "text": "소리",
-      "count": 22,
-      "docCount": 20,
-      "likeSum": 39,
-      "avgLikes": 1.9,
-      "weight": 41.04
-    },
-    {
-      "text": "지방",
-      "count": 23,
-      "docCount": 19,
-      "likeSum": 31,
-      "avgLikes": 1.6,
-      "weight": 40.8
+      "weight": 30.98
     },
     {
       "text": "철도",
@@ -541,7 +325,15 @@
       "docCount": 7,
       "likeSum": 526,
       "avgLikes": 75.1,
-      "weight": 40.19
+      "weight": 29.0
+    },
+    {
+      "text": "대상",
+      "count": 10,
+      "docCount": 10,
+      "likeSum": 555,
+      "avgLikes": 55.5,
+      "weight": 28.68
     },
     {
       "text": "기존",
@@ -549,31 +341,15 @@
       "docCount": 8,
       "likeSum": 553,
       "avgLikes": 69.1,
-      "weight": 39.6
+      "weight": 28.5
     },
     {
-      "text": "청년",
-      "count": 17,
-      "docCount": 14,
-      "likeSum": 58,
-      "avgLikes": 4.1,
-      "weight": 39.27
-    },
-    {
-      "text": "유공자",
-      "count": 14,
-      "docCount": 12,
-      "likeSum": 101,
-      "avgLikes": 8.4,
-      "weight": 39.12
-    },
-    {
-      "text": "민영",
-      "count": 12,
-      "docCount": 7,
-      "likeSum": 86,
-      "avgLikes": 12.3,
-      "weight": 36.83
+      "text": "미래",
+      "count": 16,
+      "docCount": 16,
+      "likeSum": 323,
+      "avgLikes": 20.2,
+      "weight": 28.43
     },
     {
       "text": "확대",
@@ -581,207 +357,15 @@
       "docCount": 6,
       "likeSum": 525,
       "avgLikes": 87.5,
-      "weight": 36.69
+      "weight": 28.19
     },
     {
-      "text": "시대",
-      "count": 13,
-      "docCount": 12,
-      "likeSum": 103,
-      "avgLikes": 8.6,
-      "weight": 36.5
-    },
-    {
-      "text": "부모",
+      "text": "국민",
       "count": 16,
       "docCount": 16,
-      "likeSum": 58,
-      "avgLikes": 3.6,
-      "weight": 35.6
-    },
-    {
-      "text": "민주당",
-      "count": 14,
-      "docCount": 11,
-      "likeSum": 63,
-      "avgLikes": 5.7,
-      "weight": 35.35
-    },
-    {
-      "text": "건강",
-      "count": 21,
-      "docCount": 14,
-      "likeSum": 17,
-      "avgLikes": 1.2,
-      "weight": 34.35
-    },
-    {
-      "text": "운영",
-      "count": 15,
-      "docCount": 15,
-      "likeSum": 59,
-      "avgLikes": 3.9,
-      "weight": 34.15
-    },
-    {
-      "text": "제외",
-      "count": 16,
-      "docCount": 16,
-      "likeSum": 47,
-      "avgLikes": 2.9,
-      "weight": 33.54
-    },
-    {
-      "text": "젊은이",
-      "count": 24,
-      "docCount": 19,
-      "likeSum": 10,
-      "avgLikes": 0.5,
-      "weight": 32.12
-    },
-    {
-      "text": "주장",
-      "count": 7,
-      "docCount": 6,
-      "likeSum": 526,
-      "avgLikes": 87.7,
-      "weight": 32.12
-    },
-    {
-      "text": "인구",
-      "count": 25,
-      "docCount": 22,
-      "likeSum": 9,
-      "avgLikes": 0.4,
-      "weight": 31.86
-    },
-    {
-      "text": "열차",
-      "count": 11,
-      "docCount": 11,
-      "likeSum": 104,
-      "avgLikes": 9.5,
-      "weight": 31.65
-    },
-    {
-      "text": "에어컨",
-      "count": 7,
-      "docCount": 6,
-      "likeSum": 422,
-      "avgLikes": 70.3,
-      "weight": 30.9
-    },
-    {
-      "text": "해결",
-      "count": 14,
-      "docCount": 14,
-      "likeSum": 43,
-      "avgLikes": 3.1,
-      "weight": 29.72
-    },
-    {
-      "text": "반대",
-      "count": 22,
-      "docCount": 22,
-      "likeSum": 12,
-      "avgLikes": 0.5,
-      "weight": 29.66
-    },
-    {
-      "text": "도시",
-      "count": 16,
-      "docCount": 12,
-      "likeSum": 22,
-      "avgLikes": 1.8,
-      "weight": 29.33
-    },
-    {
-      "text": "사용",
-      "count": 13,
-      "docCount": 13,
-      "likeSum": 46,
-      "avgLikes": 3.5,
-      "weight": 28.73
-    },
-    {
-      "text": "대중",
-      "count": 6,
-      "docCount": 5,
-      "likeSum": 524,
-      "avgLikes": 104.8,
-      "weight": 28.38
-    },
-    {
-      "text": "택배",
-      "count": 12,
-      "docCount": 10,
-      "likeSum": 45,
-      "avgLikes": 4.5,
-      "weight": 28.37
-    },
-    {
-      "text": "무상",
-      "count": 15,
-      "docCount": 9,
-      "likeSum": 18,
-      "avgLikes": 2.0,
-      "weight": 28.18
-    },
-    {
-      "text": "노친",
-      "count": 8,
-      "docCount": 8,
-      "likeSum": 171,
-      "avgLikes": 21.4,
-      "weight": 27.89
-    },
-    {
-      "text": "국민연금",
-      "count": 13,
-      "docCount": 13,
-      "likeSum": 40,
-      "avgLikes": 3.1,
-      "weight": 27.62
-    },
-    {
-      "text": "수단",
-      "count": 6,
-      "docCount": 6,
-      "likeSum": 524,
-      "avgLikes": 87.3,
-      "weight": 27.51
-    },
-    {
-      "text": "내용",
-      "count": 6,
-      "docCount": 6,
-      "likeSum": 523,
-      "avgLikes": 87.2,
-      "weight": 27.5
-    },
-    {
-      "text": "공짜",
-      "count": 25,
-      "docCount": 23,
-      "likeSum": 3,
-      "avgLikes": 0.1,
-      "weight": 27.45
-    },
-    {
-      "text": "정치인",
-      "count": 14,
-      "docCount": 10,
-      "likeSum": 23,
-      "avgLikes": 2.3,
-      "weight": 27.37
-    },
-    {
-      "text": "노후",
-      "count": 9,
-      "docCount": 9,
-      "likeSum": 103,
-      "avgLikes": 11.4,
-      "weight": 27.15
+      "likeSum": 271,
+      "avgLikes": 16.9,
+      "weight": 27.1
     },
     {
       "text": "바캉스",
@@ -789,71 +373,95 @@
       "docCount": 5,
       "likeSum": 1202,
       "avgLikes": 240.4,
-      "weight": 26.95
+      "weight": 26.77
     },
     {
-      "text": "사회",
-      "count": 17,
-      "docCount": 17,
-      "likeSum": 18,
-      "avgLikes": 1.1,
-      "weight": 26.82
+      "text": "주장",
+      "count": 7,
+      "docCount": 6,
+      "likeSum": 526,
+      "avgLikes": 87.7,
+      "weight": 26.38
     },
     {
-      "text": "정상",
-      "count": 13,
-      "docCount": 13,
-      "likeSum": 33,
-      "avgLikes": 2.5,
-      "weight": 26.14
-    },
-    {
-      "text": "이해",
-      "count": 16,
+      "text": "법안",
+      "count": 18,
       "docCount": 14,
-      "likeSum": 16,
-      "avgLikes": 1.1,
-      "weight": 25.76
+      "likeSum": 162,
+      "avgLikes": 11.6,
+      "weight": 25.72
     },
     {
-      "text": "평일",
-      "count": 9,
-      "docCount": 7,
-      "likeSum": 64,
-      "avgLikes": 9.1,
-      "weight": 25.68
+      "text": "대중",
+      "count": 6,
+      "docCount": 5,
+      "likeSum": 524,
+      "avgLikes": 104.8,
+      "weight": 25.29
     },
     {
-      "text": "고령",
-      "count": 13,
-      "docCount": 10,
-      "likeSum": 22,
-      "avgLikes": 2.2,
+      "text": "에어컨",
+      "count": 7,
+      "docCount": 6,
+      "likeSum": 422,
+      "avgLikes": 70.3,
+      "weight": 25.23
+    },
+    {
+      "text": "경제",
+      "count": 30,
+      "docCount": 25,
+      "likeSum": 125,
+      "avgLikes": 5.0,
       "weight": 25.1
     },
     {
-      "text": "부담",
-      "count": 14,
-      "docCount": 12,
-      "likeSum": 19,
-      "avgLikes": 1.6,
-      "weight": 24.63
+      "text": "시간대",
+      "count": 44,
+      "docCount": 38,
+      "likeSum": 114,
+      "avgLikes": 3.0,
+      "weight": 25.02
     },
     {
-      "text": "현실",
-      "count": 14,
+      "text": "지모퀴",
+      "count": 12,
       "docCount": 12,
-      "likeSum": 19,
-      "avgLikes": 1.6,
-      "weight": 24.63
+      "likeSum": 252,
+      "avgLikes": 21.0,
+      "weight": 24.88
     },
     {
-      "text": "조정",
-      "count": 11,
-      "docCount": 10,
-      "likeSum": 35,
-      "avgLikes": 3.5,
-      "weight": 24.24
+      "text": "수단",
+      "count": 6,
+      "docCount": 6,
+      "likeSum": 524,
+      "avgLikes": 87.3,
+      "weight": 24.4
+    },
+    {
+      "text": "내용",
+      "count": 6,
+      "docCount": 6,
+      "likeSum": 523,
+      "avgLikes": 87.2,
+      "weight": 24.39
+    },
+    {
+      "text": "불가",
+      "count": 4,
+      "docCount": 4,
+      "likeSum": 1001,
+      "avgLikes": 250.2,
+      "weight": 24.11
+    },
+    {
+      "text": "나라",
+      "count": 55,
+      "docCount": 43,
+      "likeSum": 88,
+      "avgLikes": 2.0,
+      "weight": 23.94
     },
     {
       "text": "지자체",
@@ -861,79 +469,383 @@
       "docCount": 5,
       "likeSum": 585,
       "avgLikes": 117.0,
-      "weight": 24.08
+      "weight": 23.57
     },
     {
-      "text": "전국",
-      "count": 9,
-      "docCount": 9,
-      "likeSum": 63,
-      "avgLikes": 7.0,
-      "weight": 23.97
+      "text": "지역",
+      "count": 24,
+      "docCount": 22,
+      "likeSum": 120,
+      "avgLikes": 5.5,
+      "weight": 23.17
     },
     {
-      "text": "청소년",
-      "count": 15,
-      "docCount": 11,
-      "likeSum": 12,
-      "avgLikes": 1.1,
-      "weight": 23.85
+      "text": "운영사",
+      "count": 3,
+      "docCount": 3,
+      "likeSum": 1423,
+      "avgLikes": 474.3,
+      "weight": 23.08
     },
     {
-      "text": "도움",
-      "count": 13,
-      "docCount": 13,
-      "likeSum": 23,
-      "avgLikes": 1.8,
-      "weight": 23.59
+      "text": "장애인",
+      "count": 26,
+      "docCount": 22,
+      "likeSum": 105,
+      "avgLikes": 4.8,
+      "weight": 22.98
     },
     {
-      "text": "개정",
-      "count": 10,
-      "docCount": 10,
-      "likeSum": 41,
-      "avgLikes": 4.1,
-      "weight": 23.03
+      "text": "카드",
+      "count": 39,
+      "docCount": 25,
+      "likeSum": 69,
+      "avgLikes": 2.8,
+      "weight": 22.79
     },
     {
-      "text": "소득",
-      "count": 14,
-      "docCount": 14,
-      "likeSum": 17,
+      "text": "손실",
+      "count": 4,
+      "docCount": 4,
+      "likeSum": 622,
+      "avgLikes": 155.5,
+      "weight": 22.21
+    },
+    {
+      "text": "복지",
+      "count": 61,
+      "docCount": 51,
+      "likeSum": 74,
+      "avgLikes": 1.5,
+      "weight": 21.81
+    },
+    {
+      "text": "방향",
+      "count": 4,
+      "docCount": 4,
+      "likeSum": 524,
+      "avgLikes": 131.0,
+      "weight": 21.53
+    },
+    {
+      "text": "민영",
+      "count": 12,
+      "docCount": 7,
+      "likeSum": 86,
+      "avgLikes": 12.3,
+      "weight": 21.39
+    },
+    {
+      "text": "제한",
+      "count": 21,
+      "docCount": 18,
+      "likeSum": 92,
+      "avgLikes": 5.1,
+      "weight": 21.17
+    },
+    {
+      "text": "혜택",
+      "count": 68,
+      "docCount": 59,
+      "likeSum": 70,
       "avgLikes": 1.2,
-      "weight": 22.9
+      "weight": 21.15
     },
     {
-      "text": "걱정",
+      "text": "언급",
+      "count": 3,
+      "docCount": 2,
+      "likeSum": 541,
+      "avgLikes": 270.5,
+      "weight": 21.14
+    },
+    {
+      "text": "환승",
+      "count": 19,
+      "docCount": 15,
+      "likeSum": 81,
+      "avgLikes": 5.4,
+      "weight": 20.54
+    },
+    {
+      "text": "유공자",
+      "count": 14,
+      "docCount": 12,
+      "likeSum": 101,
+      "avgLikes": 8.4,
+      "weight": 20.52
+    },
+    {
+      "text": "노친",
+      "count": 8,
+      "docCount": 8,
+      "likeSum": 171,
+      "avgLikes": 21.4,
+      "weight": 20.41
+    },
+    {
+      "text": "정책",
+      "count": 21,
+      "docCount": 21,
+      "likeSum": 96,
+      "avgLikes": 4.6,
+      "weight": 20.33
+    },
+    {
+      "text": "대중교통",
+      "count": 21,
+      "docCount": 20,
+      "likeSum": 90,
+      "avgLikes": 4.5,
+      "weight": 20.21
+    },
+    {
+      "text": "유료",
+      "count": 25,
+      "docCount": 22,
+      "likeSum": 77,
+      "avgLikes": 3.5,
+      "weight": 20.04
+    },
+    {
+      "text": "시대",
+      "count": 13,
+      "docCount": 12,
+      "likeSum": 103,
+      "avgLikes": 8.6,
+      "weight": 19.9
+    },
+    {
+      "text": "교통비",
+      "count": 22,
+      "docCount": 19,
+      "likeSum": 77,
+      "avgLikes": 4.1,
+      "weight": 19.89
+    },
+    {
+      "text": "근거",
+      "count": 3,
+      "docCount": 3,
+      "likeSum": 525,
+      "avgLikes": 175.0,
+      "weight": 19.64
+    },
+    {
+      "text": "과거",
+      "count": 3,
+      "docCount": 3,
+      "likeSum": 524,
+      "avgLikes": 174.7,
+      "weight": 19.64
+    },
+    {
+      "text": "변경",
+      "count": 3,
+      "docCount": 3,
+      "likeSum": 523,
+      "avgLikes": 174.3,
+      "weight": 19.63
+    },
+    {
+      "text": "소진",
+      "count": 3,
+      "docCount": 3,
+      "likeSum": 523,
+      "avgLikes": 174.3,
+      "weight": 19.63
+    },
+    {
+      "text": "도입",
+      "count": 2,
+      "docCount": 2,
+      "likeSum": 1027,
+      "avgLikes": 513.5,
+      "weight": 19.07
+    },
+    {
+      "text": "유럽",
+      "count": 2,
+      "docCount": 2,
+      "likeSum": 1000,
+      "avgLikes": 500.0,
+      "weight": 19.0
+    },
+    {
+      "text": "열차",
+      "count": 11,
+      "docCount": 11,
+      "likeSum": 104,
+      "avgLikes": 9.5,
+      "weight": 18.89
+    },
+    {
+      "text": "이용객",
+      "count": 2,
+      "docCount": 2,
+      "likeSum": 902,
+      "avgLikes": 451.0,
+      "weight": 18.71
+    },
+    {
+      "text": "이상",
+      "count": 72,
+      "docCount": 65,
+      "likeSum": 53,
+      "avgLikes": 0.8,
+      "weight": 18.6
+    },
+    {
+      "text": "자리",
+      "count": 30,
+      "docCount": 24,
+      "likeSum": 54,
+      "avgLikes": 2.2,
+      "weight": 18.39
+    },
+    {
+      "text": "세금",
+      "count": 31,
+      "docCount": 30,
+      "likeSum": 64,
+      "avgLikes": 2.1,
+      "weight": 18.29
+    },
+    {
+      "text": "노후",
       "count": 9,
       "docCount": 9,
-      "likeSum": 53,
-      "avgLikes": 5.9,
-      "weight": 22.9
+      "likeSum": 103,
+      "avgLikes": 11.4,
+      "weight": 18.13
     },
     {
-      "text": "애초",
-      "count": 12,
-      "docCount": 12,
-      "likeSum": 25,
+      "text": "민주당",
+      "count": 14,
+      "docCount": 11,
+      "likeSum": 63,
+      "avgLikes": 5.7,
+      "weight": 18.01
+    },
+    {
+      "text": "청년",
+      "count": 17,
+      "docCount": 14,
+      "likeSum": 58,
+      "avgLikes": 4.1,
+      "weight": 17.63
+    },
+    {
+      "text": "부결",
+      "count": 3,
+      "docCount": 3,
+      "likeSum": 285,
+      "avgLikes": 95.0,
+      "weight": 17.54
+    },
+    {
+      "text": "보전",
+      "count": 4,
+      "docCount": 2,
+      "likeSum": 91,
+      "avgLikes": 45.5,
+      "weight": 17.36
+    },
+    {
+      "text": "전철",
+      "count": 20,
+      "docCount": 18,
+      "likeSum": 58,
+      "avgLikes": 3.2,
+      "weight": 17.36
+    },
+    {
+      "text": "비율",
+      "count": 2,
+      "docCount": 2,
+      "likeSum": 523,
+      "avgLikes": 261.5,
+      "weight": 17.17
+    },
+    {
+      "text": "한도",
+      "count": 2,
+      "docCount": 2,
+      "likeSum": 523,
+      "avgLikes": 261.5,
+      "weight": 17.17
+    },
+    {
+      "text": "평일",
+      "count": 9,
+      "docCount": 7,
+      "likeSum": 64,
+      "avgLikes": 9.1,
+      "weight": 16.9
+    },
+    {
+      "text": "시위",
+      "count": 5,
+      "docCount": 4,
+      "likeSum": 100,
+      "avgLikes": 25.0,
+      "weight": 16.81
+    },
+    {
+      "text": "그때",
+      "count": 5,
+      "docCount": 5,
+      "likeSum": 121,
+      "avgLikes": 24.2,
+      "weight": 16.67
+    },
+    {
+      "text": "연금",
+      "count": 30,
+      "docCount": 25,
+      "likeSum": 42,
+      "avgLikes": 1.7,
+      "weight": 16.28
+    },
+    {
+      "text": "정신",
+      "count": 6,
+      "docCount": 5,
+      "likeSum": 79,
+      "avgLikes": 15.8,
+      "weight": 16.27
+    },
+    {
+      "text": "부모",
+      "count": 16,
+      "docCount": 16,
+      "likeSum": 58,
+      "avgLikes": 3.6,
+      "weight": 16.25
+    },
+    {
+      "text": "운영",
+      "count": 15,
+      "docCount": 15,
+      "likeSum": 59,
+      "avgLikes": 3.9,
+      "weight": 16.24
+    },
+    {
+      "text": "비용",
+      "count": 23,
+      "docCount": 17,
+      "likeSum": 36,
       "avgLikes": 2.1,
-      "weight": 22.81
+      "weight": 15.7
     },
     {
-      "text": "하루",
-      "count": 12,
-      "docCount": 12,
-      "likeSum": 25,
-      "avgLikes": 2.1,
-      "weight": 22.81
-    },
-    {
-      "text": "학생",
-      "count": 13,
-      "docCount": 9,
-      "likeSum": 14,
-      "avgLikes": 1.6,
-      "weight": 22.76
+      "text": "소비",
+      "count": 7,
+      "docCount": 7,
+      "likeSum": 75,
+      "avgLikes": 10.7,
+      "weight": 15.67
     },
     {
       "text": "대표",
@@ -941,31 +853,119 @@
       "docCount": 6,
       "likeSum": 52,
       "avgLikes": 8.7,
-      "weight": 22.52
+      "weight": 15.66
     },
     {
-      "text": "개혁",
-      "count": 11,
-      "docCount": 10,
-      "likeSum": 27,
-      "avgLikes": 2.7,
-      "weight": 22.51
+      "text": "활성",
+      "count": 5,
+      "docCount": 5,
+      "likeSum": 93,
+      "avgLikes": 18.6,
+      "weight": 15.54
     },
     {
-      "text": "감사",
-      "count": 9,
-      "docCount": 8,
-      "likeSum": 43,
-      "avgLikes": 5.4,
-      "weight": 22.34
-    },
-    {
-      "text": "영상",
+      "text": "전국",
       "count": 9,
       "docCount": 9,
+      "likeSum": 63,
+      "avgLikes": 7.0,
+      "weight": 15.48
+    },
+    {
+      "text": "적극",
+      "count": 7,
+      "docCount": 7,
+      "likeSum": 72,
+      "avgLikes": 10.3,
+      "weight": 15.47
+    },
+    {
+      "text": "택배",
+      "count": 12,
+      "docCount": 10,
+      "likeSum": 45,
+      "avgLikes": 4.5,
+      "weight": 15.27
+    },
+    {
+      "text": "제외",
+      "count": 16,
+      "docCount": 16,
+      "likeSum": 47,
+      "avgLikes": 2.9,
+      "weight": 14.96
+    },
+    {
+      "text": "소리",
+      "count": 22,
+      "docCount": 20,
+      "likeSum": 39,
+      "avgLikes": 1.9,
+      "weight": 14.84
+    },
+    {
+      "text": "일반인",
+      "count": 8,
+      "docCount": 6,
+      "likeSum": 44,
+      "avgLikes": 7.3,
+      "weight": 14.82
+    },
+    {
+      "text": "투자",
+      "count": 4,
+      "docCount": 4,
+      "likeSum": 94,
+      "avgLikes": 23.5,
+      "weight": 14.79
+    },
+    {
+      "text": "전장",
+      "count": 4,
+      "docCount": 4,
+      "likeSum": 93,
+      "avgLikes": 23.2,
+      "weight": 14.75
+    },
+    {
+      "text": "의견",
+      "count": 3,
+      "docCount": 3,
+      "likeSum": 125,
+      "avgLikes": 41.7,
+      "weight": 14.73
+    },
+    {
+      "text": "보증금",
+      "count": 1,
+      "docCount": 1,
+      "likeSum": 902,
+      "avgLikes": 902.0,
+      "weight": 14.61
+    },
+    {
+      "text": "걱정",
+      "count": 9,
+      "docCount": 9,
+      "likeSum": 53,
+      "avgLikes": 5.9,
+      "weight": 14.58
+    },
+    {
+      "text": "사용",
+      "count": 13,
+      "docCount": 13,
       "likeSum": 46,
-      "avgLikes": 5.1,
-      "weight": 22.03
+      "avgLikes": 3.5,
+      "weight": 14.51
+    },
+    {
+      "text": "역차별",
+      "count": 5,
+      "docCount": 5,
+      "likeSum": 70,
+      "avgLikes": 14.0,
+      "weight": 14.35
     }
   ]
 }
