@@ -1,0 +1,38 @@
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-soft: #4a4a4a;
+  --text-muted: #8a8a8a;
+  --rule: #e6e6e6;
+  --accent: #c0392b;
+  --accent-soft: #fdf3f2;
+  --highlight: #fff6d6;
+  --maxw: 720px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
