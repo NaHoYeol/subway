@@ -117,6 +117,22 @@ export default function Page() {
         <section className={styles.section}>
           <h3 className={styles.h3}>지하철 노인들은 ‘빌런’?</h3>
 
+          <figure className={styles.figure}>
+            <Image
+              src="/comments-montage.png"
+              alt="노인 무임승차를 비판·조롱하는 유튜브 댓글 모음"
+              width={892}
+              height={1474}
+              sizes="(max-width: 720px) 100vw, 720px"
+              className={styles.figureImg}
+            />
+            <figcaption className={styles.caption}>
+              노인 무임승차 영상에 달린 댓글들. ‘노친네’ 등 노인을 조롱·혐오하는
+              표현이 적지 않다. (개인정보 보호를 위해 프로필 사진과 아이디는
+              모자이크 처리)
+            </figcaption>
+          </figure>
+
           <WordCloud />
 
           <p>
