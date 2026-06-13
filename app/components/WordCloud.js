@@ -136,8 +136,8 @@ export default function WordCloud() {
       </div>
 
       <figcaption className={styles.caption}>
-        단어 크기 = 댓글에서 언급된 빈도 (공감을 많이 받은 댓글일수록 약간 더 크게
-        반영). 단어에 마우스를 올리면 상세 수치를 볼 수 있다. (자료: 유튜브 ‘
+        단어 크기 = 댓글에서 언급된 빈도 (좋아요를 많이 받은 댓글의 단어일수록 더
+        크게 반영). 단어에 마우스를 올리면 상세 수치를 볼 수 있다. (자료: 유튜브 ‘
         {data.meta.channel}’ 영상 댓글 {data.meta.commentCount.toLocaleString()}개
         분석)
       </figcaption>
