@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import WordCloud from "./components/WordCloud";
 
 function Placeholder({ label, title, desc }) {
   return (
@@ -116,11 +117,7 @@ export default function Page() {
         <section className={styles.section}>
           <h3 className={styles.h3}>지하철 노인들은 ‘빌런’?</h3>
 
-          <Placeholder
-            label="인터랙티브 ① · 곧 추가됩니다"
-            title="유튜브 댓글 워드클라우드"
-            desc="노인 무임승차 관련 영상 댓글에서 가장 많이 등장한 단어를 시각화합니다."
-          />
+          <WordCloud />
 
           <p>
             취재진은 온라인 공간에서 노인 무임승차를 둘러싼 담론을 분석했다. 그
