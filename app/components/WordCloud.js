@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+// 정적 워드클라우드: 레이아웃은 d3-cloud로 계산하되 호버/툴팁 등 상호작용은 없음.
 import cloud from "d3-cloud";
 import data from "../_data/wordcloud.json";
 import styles from "./WordCloud.module.css";
@@ -24,7 +25,6 @@ export default function WordCloud() {
   const containerRef = useRef(null);
   const [width, setWidth] = useState(720);
   const [laidOut, setLaidOut] = useState([]);
-  const [hover, setHover] = useState(null);
 
   const height = Math.round(width * 0.62);
 
@@ -105,41 +105,19 @@ export default function WordCloud() {
                 style={{
                   fontSize: w.size,
                   fill: colorFor(w.index),
-                  opacity: hover && hover !== w.text ? 0.25 : 1,
                 }}
-                onMouseEnter={() => setHover(w.text)}
-                onMouseLeave={() => setHover(null)}
-                onFocus={() => setHover(w.text)}
-                onBlur={() => setHover(null)}
-                tabIndex={0}
               >
                 {w.text}
               </text>
             ))}
           </g>
         </svg>
-
-        {hover &&
-          (() => {
-            const w = data.words.find((x) => x.text === hover);
-            if (!w) return null;
-            return (
-              <div className={styles.tooltip}>
-                <strong>{w.text}</strong>
-                <span>
-                  좋아요 {w.likeSum.toLocaleString()} · 언급{" "}
-                  {w.count.toLocaleString()}회 · 평균 ♥{w.avgLikes}
-                </span>
-              </div>
-            );
-          })()}
       </div>
 
       <figcaption className={styles.caption}>
         단어 크기 = 그 단어가 등장한 댓글들이 받은 좋아요의 총합(공감의 총량).
-        단어에 마우스를 올리면 상세 수치를 볼 수 있다. (자료: 유튜브 ‘
-        {data.meta.channel}’ 영상 댓글 {data.meta.commentCount.toLocaleString()}개
-        분석)
+        (자료: 유튜브 ‘{data.meta.channel}’ 영상 댓글{" "}
+        {data.meta.commentCount.toLocaleString()}개 분석)
       </figcaption>
     </figure>
   );
