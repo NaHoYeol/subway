@@ -81,7 +81,6 @@ export default function WordCloud() {
   return (
     <figure className={styles.wrap}>
       <div className={styles.head}>
-        <span className={styles.badge}>유튜브 댓글 분석</span>
         <p className={styles.headText}>
           “{data.meta.videoTitle}” 영상의 댓글{" "}
           {data.meta.commentCount.toLocaleString()}개에서 많이 등장한 단어
