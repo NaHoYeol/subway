@@ -33,15 +33,15 @@ export function topPercent(p) {
   return Math.max(1, Math.round((1 - p) * 100));
 }
 
-// 백분위 p(0~1) -> 파랑(하위)~흰색~빨강(상위) 색상
+// 백분위 p(0~1) -> 파랑(하위)~빨강(상위). 평균 부근도 인지되도록 대비 곡선 적용.
 export function colorForP(p) {
-  const red = [210, 59, 47];
-  const white = [240, 240, 240];
-  const blue = [47, 111, 210];
-  const mix = (a, b, t) =>
-    a.map((v, i) => Math.round(v + (b[i] - v) * t));
-  let rgb;
-  if (p >= 0.5) rgb = mix(white, red, (p - 0.5) * 2);
-  else rgb = mix(white, blue, (0.5 - p) * 2);
+  const red = [199, 38, 30];
+  const mid = [236, 236, 230];
+  const blue = [25, 100, 205];
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  const t = Math.max(-1, Math.min(1, (p - 0.5) * 2));
+  // |t|를 0.55제곱으로 키워 평균에서 조금만 벗어나도 빠르게 채도 상승
+  const s = Math.sign(t) * Math.pow(Math.abs(t), 0.55);
+  const rgb = s >= 0 ? mix(mid, red, s) : mix(mid, blue, -s);
   return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 }

@@ -71,20 +71,41 @@ export default function SubwayExplorer() {
     };
   }, []);
 
+  // 입력 역명 → 데이터의 정식 역명 (역 접미사·부역명·부분일치 보정)
+  const resolveName = (input) => {
+    const t = (input || "").trim();
+    if (!t) return null;
+    if (data.stations[t]) return t;
+    const a = t.replace(/역$/, "");
+    if (data.stations[a]) return a;
+    return (
+      names.find((n) => n.split("(")[0] === t || n.split("(")[0] === a) ||
+      names.find((n) => n.startsWith(t) || n.startsWith(a)) ||
+      null
+    );
+  };
+
   // 경로 계산
   const compute = () => {
     setError("");
-    if (origin === dest) {
+    const o = resolveName(origin);
+    const d = resolveName(dest);
+    const missing = [!o && origin, !d && dest].filter(Boolean);
+    if (missing.length) {
+      setError(
+        `‘${missing.join(", ")}’ 역을 찾을 수 없습니다. 이 지도는 서울교통공사 1~8호선 운영 역만 포함합니다(회기·외대앞 등 코레일 운영 구간 제외).`
+      );
+      setRoutes([]);
+      return;
+    }
+    if (o !== origin) setOrigin(o);
+    if (d !== dest) setDest(d);
+    if (o === d) {
       setError("출발역과 도착역이 같습니다.");
       setRoutes([]);
       return;
     }
-    if (!data.stations[origin] || !data.stations[dest]) {
-      setError("역명을 목록에서 선택해 주세요.");
-      setRoutes([]);
-      return;
-    }
-    const r = findRoutes(graph, origin, dest, 3);
+    const r = findRoutes(graph, o, d, 3);
     if (!r.length) {
       setError("경로를 찾지 못했습니다.");
       setRoutes([]);
@@ -130,17 +151,29 @@ export default function SubwayExplorer() {
     const S = data.stations;
     const latlngs = route.stations.map((n) => [S[n].lat, S[n].lng]);
 
-    // 구간(역-역)별 그라데이션 선
+    // 어두운 외곽선(casing) — 색과 무관하게 경로가 항상 보이도록
+    L.polyline(latlngs, {
+      color: "#2a2a2a",
+      weight: 11,
+      opacity: 0.85,
+      lineJoin: "round",
+      lineCap: "round",
+    }).addTo(layer);
+
+    // 구간(역-역)별 그라데이션 선 (외곽선 위에 올림)
     for (let i = 0; i < route.stations.length - 1; i++) {
       const a = route.stations[i];
       const b = route.stations[i + 1];
-      const pa = percentile(dist.sorted, dist.map.get(a) ?? 0);
-      const pb = percentile(dist.sorted, dist.map.get(b) ?? 0);
-      const c = colorForP((pa + pb) / 2);
+      const va = dist.map.get(a);
+      const vb = dist.map.get(b);
+      const hasData = typeof va === "number" && typeof vb === "number";
+      const pa = percentile(dist.sorted, va ?? 0);
+      const pb = percentile(dist.sorted, vb ?? 0);
       L.polyline([latlngs[i], latlngs[i + 1]], {
-        color: c,
-        weight: 7,
-        opacity: 0.9,
+        color: hasData ? colorForP((pa + pb) / 2) : "#9aa0a6",
+        weight: 6,
+        opacity: 1,
+        lineCap: "round",
       }).addTo(layer);
     }
 
