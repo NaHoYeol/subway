@@ -432,14 +432,6 @@
       "weight": 271
     },
     {
-      "text": "지모퀴",
-      "count": 12,
-      "docCount": 12,
-      "likeSum": 252,
-      "avgLikes": 21.0,
-      "weight": 252
-    },
-    {
       "text": "무임",
       "count": 83,
       "docCount": 73,
@@ -966,6 +958,14 @@
       "likeSum": 39,
       "avgLikes": 1.9,
       "weight": 39
+    },
+    {
+      "text": "특정",
+      "count": 7,
+      "docCount": 7,
+      "likeSum": 38,
+      "avgLikes": 5.4,
+      "weight": 38
     }
   ]
 }
