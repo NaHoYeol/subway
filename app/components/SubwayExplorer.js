@@ -518,17 +518,18 @@ export default function SubwayExplorer() {
               {summary.verdict.label}
             </span>
             <strong>
-              이 구간의 최근 1주일 {daytype === "wd" ? "평일" : "주말"} 노인
-              비중은 2024년 평일 분포 기준 <em>상위 {summary.top}%</em>
+              이 구간의 {daytype === "wd" ? "평일" : "주말"} {hour}시 노인 비중은
+              2024년 평일 분포 기준 <em>상위 {summary.top}%</em>
             </strong>
           </div>
           <p className={styles.resultDetail}>
-            경유 {route.stops}개 역의 최근 1주일{" "}
-            {daytype === "wd" ? "평일" : "주말"} 평균 노인 비중{" "}
-            {summary.avg.toFixed(1)}% (2024년 평일 전체 평균 {baseline.mean}%).
-            표시 값은 최근 1주일 데이터, 색·‘상위 %’는 시간대·요일을 같은 잣대로
-            비교하도록 <b>2024년 평일 전 시간대·전 역</b>을 모은 분포를 기준으로
-            한다. 빨갈수록 그 기준보다 노인 비중이 높은 역, 파랄수록 낮은 역이다.
+            경유 {route.stops}개 역의 <b>{daytype === "wd" ? "평일" : "주말"}{" "}
+            {hour}시~{hour + 1}시</b> 평균 노인 비중은 {summary.avg.toFixed(1)}%다
+            (최근 1주일 API 기준). 즉 이 값은 <b>선택한 시간대만</b>의 평균이다.
+            한편 색·‘상위 %’의 잣대는 시간대·요일을 같은 기준으로 비교하기 위해,
+            <b>2024년 평일 전 시간대·전 역</b>을 모은 분포(평균 {baseline.mean}%)로
+            고정했다. 빨갈수록 그 잣대보다 노인 비중이 높은 역, 파랄수록 낮은
+            역이다.
           </p>
         </div>
       )}
