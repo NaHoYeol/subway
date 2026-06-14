@@ -110,9 +110,8 @@ export default function Page() {
               className={styles.figureImg}
             />
             <figcaption className={styles.caption}>
-              노인 무임승차 영상에 달린 댓글들. ‘노친네’ 등 노인을 조롱·혐오하는
-              표현이 적지 않다. (개인정보 보호를 위해 프로필 사진과 아이디는
-              모자이크 처리)
+              노인 무임승차 영상 댓글. 조롱·혐오 표현이 적지 않다. (프로필·아이디
+              모자이크)
             </figcaption>
           </figure>
 
@@ -178,9 +177,7 @@ export default function Page() {
               className={styles.figureImg}
             />
             <figcaption className={styles.caption}>
-              2024년 연간 누적 지하철 이용 인원 중 노인은 약 14%였다. 서울시
-              전체 인구의 노인 비중(약 20%)보다 낮은 수준이다. (자료:
-              서울교통공사 2024년 승하차 인원)
+              2024년 연간 지하철 이용객 중 노인은 약 14%. (자료: 서울교통공사)
             </figcaption>
           </figure>
 
@@ -194,10 +191,8 @@ export default function Page() {
               className={styles.figureImg}
             />
             <figcaption className={styles.caption}>
-              시간대별 평균 승차(왼쪽)·하차(오른쪽) 이용 인원. 비노인(초록)은
-              출근 하차 8시·퇴근 승차 18시에 뚜렷한 봉우리를 보이는 반면,
-              노인(빨강)은 출퇴근을 피한 낮 시간(15시 전후)에 완만하게 분포한다.
-              (자료: 서울교통공사 2024년 시간대별 승하차 인원)
+              시간대별 승차·하차 인원. 비노인(초록)은 출퇴근에, 노인(빨강)은 낮
+              시간(15시 전후)에 집중. (자료: 서울교통공사 2024)
             </figcaption>
           </figure>
 
@@ -242,8 +237,7 @@ export default function Page() {
               className={styles.figureImg}
             />
             <figcaption className={styles.caption}>
-              경동시장을 찾은 노인들. 이동의 목적은 시장 방문, 병원 진료, 산책,
-              친구와의 만남 등으로 다양했다.
+              경동시장의 노인들. 이동 목적은 장보기·병원·산책 등 다양했다.
             </figcaption>
           </figure>
 

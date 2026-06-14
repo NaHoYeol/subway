@@ -115,8 +115,7 @@ export default function WordCloud() {
       </div>
 
       <figcaption className={styles.caption}>
-        단어 크기 = 그 단어가 등장한 댓글들이 받은 좋아요의 총합(공감의 총량).
-        (자료: 유튜브 ‘{data.meta.channel}’ 영상 댓글{" "}
+        단어 크기 = 댓글이 받은 좋아요 총합. (유튜브 댓글{" "}
         {data.meta.commentCount.toLocaleString()}개 분석)
       </figcaption>
     </figure>
