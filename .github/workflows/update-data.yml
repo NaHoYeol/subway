@@ -1,0 +1,40 @@
+name: Update API data (daily 04:00 KST)
+
+on:
+  schedule:
+    - cron: "0 19 * * *" # 19:00 UTC = 04:00 KST
+  workflow_dispatch: {} # 수동 실행도 가능
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 최근 1주일 API 집계
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python scripts/update_api_share.py
+
+      - name: 변경 시 커밋·푸시 (Vercel 자동 재배포)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add app/_data/subway.json
+          if git diff --staged --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "chore: 최근 1주일 API 노인 비중 자동 갱신"
+            git push
+          fi
