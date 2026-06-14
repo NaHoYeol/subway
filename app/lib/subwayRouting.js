@@ -42,6 +42,9 @@ export function buildGraph(data) {
 // 연속한 두 역이 같은 노선으로 직접 연결되지 않으면 환승역 누락 → error.
 export function stitchRoute(data, waypoints) {
   const NET = data.network;
+  const S = data.stations;
+  const km = (x, y) =>
+    Math.hypot((S[x].lat - S[y].lat) * 111, (S[x].lng - S[y].lng) * 88);
   const legs = [];
   const full = [];
   for (let i = 0; i < waypoints.length - 1; i++) {
@@ -53,14 +56,29 @@ export function stitchRoute(data, waypoints) {
     for (const [line, seq] of Object.entries(NET)) {
       const ia = seq.indexOf(a);
       const ib = seq.indexOf(b);
-      if (ia >= 0 && ib >= 0) {
-        const span = Math.abs(ia - ib);
-        if (!best || span < best.span) {
-          const slice =
-            ia < ib ? seq.slice(ia, ib + 1) : seq.slice(ib, ia + 1).reverse();
-          best = { line, slice, span };
+      if (ia < 0 || ib < 0) continue;
+      const N = seq.length;
+      // 순환선(2호선 등): 첫·끝 역이 인접 → 짧은 호 선택
+      const circular = N > 10 && km(seq[0], seq[N - 1]) < 1.5;
+      let slice;
+      let span;
+      if (circular) {
+        const fwd = (ib - ia + N) % N;
+        const bwd = (ia - ib + N) % N;
+        slice = [];
+        if (fwd <= bwd) {
+          span = fwd;
+          for (let k = 0; k <= fwd; k++) slice.push(seq[(ia + k) % N]);
+        } else {
+          span = bwd;
+          for (let k = 0; k <= bwd; k++) slice.push(seq[(ia - k + N) % N]);
         }
+      } else {
+        span = Math.abs(ia - ib);
+        slice =
+          ia < ib ? seq.slice(ia, ib + 1) : seq.slice(ib, ia + 1).reverse();
       }
+      if (!best || span < best.span) best = { line, slice, span };
     }
     if (!best) return { error: "transfer" };
     legs.push({
