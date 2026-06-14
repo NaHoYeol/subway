@@ -27,8 +27,8 @@ export default function SubwayExplorer() {
   const graph = useMemo(() => buildGraph(data), []);
   const names = useMemo(() => Object.keys(data.stations).sort(), []);
 
-  const [origin, setOrigin] = useState("제기동");
-  const [dest, setDest] = useState("강남");
+  const [origin, setOrigin] = useState("");
+  const [dest, setDest] = useState("");
   const [hour, setHour] = useState(8);
   const [daytype, setDaytype] = useState("wd");
   const [routes, setRoutes] = useState([]);
@@ -148,6 +148,10 @@ export default function SubwayExplorer() {
       setRoutes(r);
       setSel(0);
       setError(r.length ? "" : "경로를 찾지 못했습니다.");
+    } else {
+      // 아직 두 역이 모두 선택되지 않음 → 경로 비우고 지도만 표시
+      setRoutes([]);
+      setError("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [origin, dest]);
@@ -174,10 +178,11 @@ export default function SubwayExplorer() {
 
   // 지도 그리기
   useEffect(() => {
-    if (!ready || !routes[sel]) return;
+    if (!ready) return;
     const L = Lref.current;
     const layer = layerRef.current;
     layer.clearLayers();
+    if (!routes[sel]) return;
     const route = routes[sel];
     const S = data.stations;
     const latlngs = route.stations.map((n) => [S[n].lat, S[n].lng]);
@@ -240,6 +245,7 @@ export default function SubwayExplorer() {
           <input
             list="stnlist"
             value={origin}
+            placeholder="역을 선택하세요"
             onChange={(e) => setOrigin(e.target.value)}
           />
         </div>
@@ -248,6 +254,7 @@ export default function SubwayExplorer() {
           <input
             list="stnlist"
             value={dest}
+            placeholder="역을 선택하세요"
             onChange={(e) => setDest(e.target.value)}
           />
         </div>
@@ -375,15 +382,17 @@ export default function SubwayExplorer() {
 
       <div className={styles.mapBox} ref={mapEl} />
 
-      <div className={styles.legend}>
-        <span>노인 비중</span>
-        <i style={{ background: colorForP(0.04) }} />
-        <i style={{ background: colorForP(0.27) }} />
-        <i style={{ background: colorForP(0.5) }} />
-        <i style={{ background: colorForP(0.73) }} />
-        <i style={{ background: colorForP(0.96) }} />
-        <span>낮음(파랑) → 높음(빨강)</span>
-      </div>
+      {routes.length > 0 && (
+        <div className={styles.legend}>
+          <span>노인 비중</span>
+          <i style={{ background: colorForP(0.04) }} />
+          <i style={{ background: colorForP(0.27) }} />
+          <i style={{ background: colorForP(0.5) }} />
+          <i style={{ background: colorForP(0.73) }} />
+          <i style={{ background: colorForP(0.96) }} />
+          <span>낮음(파랑) → 높음(빨강)</span>
+        </div>
+      )}
 
       {summary && (
         <div className={styles.result}>
