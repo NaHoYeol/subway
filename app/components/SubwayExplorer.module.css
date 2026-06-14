@@ -29,15 +29,61 @@
   color: var(--text-soft);
 }
 
-.wpRow input {
+.acWrap {
+  position: relative;
   flex: 1;
   max-width: 320px;
+}
+
+.acWrap input {
+  width: 100%;
   font-size: 15px;
   padding: 9px 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #fff;
   font-family: inherit;
+}
+
+.acList {
+  position: absolute;
+  z-index: 500;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.acList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 14.5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.acList li:hover,
+.acHi {
+  background: var(--accent-soft);
+}
+
+.acTag {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  background: #f0f0f0;
+  border-radius: 999px;
+  padding: 2px 8px;
 }
 
 .wpRemove {
@@ -330,9 +376,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-top: 12px;
-  font-size: 13.5px;
-  color: var(--text-muted);
 }
 
 .extBtn {

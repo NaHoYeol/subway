@@ -23,8 +23,92 @@ function verdict(top) {
   return { label: "적음", cls: "vLow" };
 }
 
+// 입력했을 때만 일치 항목을 보여주는 자동완성 입력 (datalist 대체)
+function AutoInput({ value, onChange, placeholder, options }) {
+  const [open, setOpen] = useState(false);
+  const [hi, setHi] = useState(-1);
+
+  const matches = useMemo(() => {
+    const q = value.trim();
+    if (!q) return [];
+    const sw = [];
+    const inc = [];
+    for (const o of options) {
+      if (o.name === q) continue;
+      if (o.name.startsWith(q)) sw.push(o);
+      else if (o.name.includes(q)) inc.push(o);
+      if (sw.length + inc.length >= 40) break;
+    }
+    return [...sw, ...inc].slice(0, 10);
+  }, [value, options]);
+
+  const pick = (name) => {
+    onChange(name);
+    setOpen(false);
+    setHi(-1);
+  };
+
+  return (
+    <div className={styles.acWrap}>
+      <input
+        value={value}
+        placeholder={placeholder}
+        autoComplete="off"
+        onChange={(e) => {
+          onChange(e.target.value);
+          setOpen(true);
+          setHi(-1);
+        }}
+        onFocus={() => value.trim() && setOpen(true)}
+        onBlur={() => setTimeout(() => setOpen(false), 120)}
+        onKeyDown={(e) => {
+          if (!open || !matches.length) return;
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setHi((h) => Math.min(h + 1, matches.length - 1));
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setHi((h) => Math.max(h - 1, 0));
+          } else if (e.key === "Enter" && hi >= 0) {
+            e.preventDefault();
+            pick(matches[hi].name);
+          } else if (e.key === "Escape") {
+            setOpen(false);
+          }
+        }}
+      />
+      {open && matches.length > 0 && (
+        <ul className={styles.acList}>
+          {matches.map((o, i) => (
+            <li
+              key={o.name}
+              className={i === hi ? styles.acHi : ""}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                pick(o.name);
+              }}
+            >
+              {o.name}
+              {o.noData && <span className={styles.acTag}>데이터 없음</span>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export default function SubwayExplorer() {
   const names = useMemo(() => Object.keys(data.stations).sort(), []);
+  const options = useMemo(
+    () => [
+      ...names.map((n) => ({ name: n, noData: false })),
+      ...Object.keys(NO_DATA)
+        .filter((n) => !data.stations[n])
+        .map((n) => ({ name: n, noData: true })),
+    ],
+    [names]
+  );
 
   const [boarding, setBoarding] = useState("");
   const [transfers, setTransfers] = useState([]); // 환승역 입력들
@@ -218,11 +302,11 @@ export default function SubwayExplorer() {
     return (
       <div className={styles.wpRow}>
         <span className={styles.wpLabel}>{label}</span>
-        <input
-          list="stnlist"
+        <AutoInput
           value={value}
+          onChange={onChange}
           placeholder={placeholder}
-          onChange={(e) => onChange(e.target.value)}
+          options={options}
         />
         {r.type === "nodata" && (
           <button
@@ -268,17 +352,6 @@ export default function SubwayExplorer() {
           {renderRow("하차역", alighting, setAlighting, null, "역을 선택하세요")}
         </div>
 
-        <datalist id="stnlist">
-          {names.map((n) => (
-            <option key={n} value={n} />
-          ))}
-          {Object.keys(NO_DATA)
-            .filter((n) => !data.stations[n])
-            .map((n) => (
-              <option key={n} value={n} label={`${n} — 데이터 없음(코레일)`} />
-            ))}
-        </datalist>
-
         <div className={styles.options}>
           <div className={styles.field}>
             <label>시간대</label>
@@ -310,6 +383,30 @@ export default function SubwayExplorer() {
               </button>
             </div>
           </div>
+
+          {route && (
+            <div className={styles.field}>
+              <label>정확한 대중교통 길찾기</label>
+              <div className={styles.extLinks}>
+                <a
+                  className={`${styles.extBtn} ${styles.kakao}`}
+                  href={kakaoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  카카오맵
+                </a>
+                <a
+                  className={`${styles.extBtn} ${styles.naver}`}
+                  href={naverUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  네이버지도
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -362,28 +459,6 @@ export default function SubwayExplorer() {
             </li>
           ))}
         </ol>
-      )}
-
-      {route && (
-        <div className={styles.extLinks}>
-          <span>정확한 대중교통 길찾기 →</span>
-          <a
-            className={`${styles.extBtn} ${styles.kakao}`}
-            href={kakaoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            카카오맵
-          </a>
-          <a
-            className={`${styles.extBtn} ${styles.naver}`}
-            href={naverUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            네이버지도
-          </a>
-        </div>
       )}
 
       {summary && (
