@@ -399,29 +399,38 @@ export default function SubwayExplorer() {
             </div>
           </div>
 
-          {route && (
-            <div className={styles.field}>
-              <label>정확한 대중교통 길찾기</label>
-              <div className={styles.extLinks}>
-                <a
-                  className={`${styles.extBtn} ${styles.kakao}`}
-                  href={kakaoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  카카오맵
-                </a>
-                <a
-                  className={`${styles.extBtn} ${styles.naver}`}
-                  href={naverUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  네이버지도
-                </a>
-              </div>
+          <div className={styles.field}>
+            <label>정확한 대중교통 길찾기</label>
+            <div className={styles.extLinks}>
+              <a
+                className={`${styles.extBtn} ${styles.kakao} ${
+                  route ? "" : styles.disabled
+                }`}
+                href={route ? kakaoUrl : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!route}
+              >
+                카카오맵
+              </a>
+              <a
+                className={`${styles.extBtn} ${styles.naver} ${
+                  route ? "" : styles.disabled
+                }`}
+                href={route ? naverUrl : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!route}
+              >
+                네이버지도
+              </a>
+              {!route && (
+                <span className={styles.extHint}>
+                  승·하차역 입력 시 활성화
+                </span>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
 
