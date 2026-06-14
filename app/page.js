@@ -1,16 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import WordCloud from "./components/WordCloud";
-
-function Placeholder({ label, title, desc }) {
-  return (
-    <div className={styles.placeholder}>
-      <span className={styles.placeholderLabel}>{label}</span>
-      <div className={styles.placeholderTitle}>{title}</div>
-      <div className={styles.placeholderDesc}>{desc}</div>
-    </div>
-  );
-}
+import SubwayExplorer from "./components/SubwayExplorer";
 
 export default function Page() {
   return (
@@ -297,11 +288,7 @@ export default function Page() {
             승객 8%는 무임 혜택받는 어르신」
           </p>
 
-          <Placeholder
-            label="인터랙티브 ③·④ · 곧 추가됩니다"
-            title="서울 구간별 노인 하차 인구 탐색"
-            desc="역·시간대를 선택하면 노인 하차 인구가 어떻게 달라지는지, 그리고 서울시 실시간 API와 비교해 봅니다."
-          />
+          <SubwayExplorer />
 
           <p>
             서울시 노인 인구 비율과 출근 시간대 지하철 노인 이용 비율을 비교해

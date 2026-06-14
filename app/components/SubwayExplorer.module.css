@@ -1,0 +1,280 @@
+.wrap {
+  margin: 40px 0;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 16px;
+  background: #f6f6f7;
+  border: 1px solid var(--rule);
+  border-radius: 12px 12px 0 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.field input,
+.field select {
+  font-size: 15px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  font-family: inherit;
+  min-width: 130px;
+}
+
+.toggle {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.toggle button {
+  border: 0;
+  background: #fff;
+  padding: 9px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.toggle .on {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.go {
+  border: 0;
+  background: #222;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.go:hover {
+  background: #000;
+}
+
+.error {
+  padding: 10px 16px;
+  background: #fdecea;
+  color: #b3261e;
+  font-size: 14px;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+}
+
+.routes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+}
+
+.routeChip {
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13.5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.routeChip:hover {
+  border-color: #999;
+}
+
+.routeOn {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+  font-weight: 700;
+}
+
+.chipTransfer {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.routeOn .chipTransfer {
+  color: #ddd;
+}
+
+.itinerary {
+  list-style: none;
+  margin: 0;
+  padding: 14px 16px;
+  background: #fbfbfb;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itinerary li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--text-soft);
+}
+
+.legLine {
+  flex: none;
+  min-width: 52px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #fff;
+  background: #555;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.legLine[data-line="1"] {
+  background: #0d3692;
+}
+.legLine[data-line="2"] {
+  background: #21a33b;
+}
+.legLine[data-line="3"] {
+  background: #ef7c1c;
+}
+.legLine[data-line="4"] {
+  background: #2c9bd6;
+}
+.legLine[data-line="5"] {
+  background: #8b50a4;
+}
+.legLine[data-line="6"] {
+  background: #ad5b27;
+}
+.legLine[data-line="7"] {
+  background: #54640d;
+}
+.legLine[data-line="8"] {
+  background: #e6186c;
+}
+
+.legText b {
+  color: var(--text);
+}
+
+.legStops {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.mapBox {
+  width: 100%;
+  height: 460px;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  z-index: 0;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.legend i {
+  width: 26px;
+  height: 12px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.result {
+  margin-top: 18px;
+  padding: 18px 20px;
+  background: var(--accent-soft);
+  border-radius: 10px;
+}
+
+.resultTop {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 17px;
+}
+
+.resultTop em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 800;
+}
+
+.badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.vHigh {
+  background: #c0392b;
+}
+.vMidHigh {
+  background: #e07b39;
+}
+.vMid {
+  background: #888;
+}
+.vMidLow {
+  background: #5a86c4;
+}
+.vLow {
+  background: #2f6fd2;
+}
+
+.resultDetail {
+  margin: 10px 0 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-soft);
+  word-break: keep-all;
+}
+
+.caption {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
