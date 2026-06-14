@@ -107,7 +107,7 @@ export default function SubwayExplorer() {
     ]) {
       if (r.type === "nodata") {
         msgs.push(
-          `‘${val.trim()}’은(는) 코레일 운영 구간이라 데이터가 없습니다. 1호선 데이터는 서울교통공사 구간(청량리~서울역)까지만 있어요. 가장 가까운 데이터 보유역 ‘${NO_DATA[r.name]}’을(를) 검색해 보세요.`
+          `‘${val.trim()}’은(는) 타 운영사(코레일·9호선 등) 구간이라 데이터가 없습니다. 이 지도는 서울교통공사 1~8호선만 포함합니다. 가장 가까운 데이터 보유역 ‘${NO_DATA[r.name]}’을(를) 검색해 보세요.`
         );
       } else if (r.type === null) {
         msgs.push(
@@ -291,9 +291,9 @@ export default function SubwayExplorer() {
 
       <div className={styles.notice}>
         <span>
-          ※ 1호선은 <b>청량리~서울역(서울교통공사)</b> 구간만 데이터가 있습니다.
-          청량리 이북(회기·외대앞 등)과 9호선은 코레일·타 운영사 구간이라
-          데이터가 없어요.
+          ※ 이 지도는 <b>서울교통공사 1~8호선</b>만 포함합니다. 1호선 청량리
+          이북(회기·외대앞 등)과 9호선·경의중앙선·분당선 등 타 운영사 구간은
+          데이터가 없습니다.
         </span>
         {resolve(origin).type === "nodata" && (
           <button
