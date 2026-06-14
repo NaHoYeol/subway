@@ -10,6 +10,7 @@ import {
   topPercent,
   colorForP,
 } from "../lib/subwayStats";
+import { NO_DATA } from "../_data/noData";
 import styles from "./SubwayExplorer.module.css";
 
 const HOURS = data.meta.hours || Array.from({ length: 18 }, (_, i) => i + 6);
@@ -71,33 +72,56 @@ export default function SubwayExplorer() {
     };
   }, []);
 
-  // 입력 역명 → 데이터의 정식 역명 (역 접미사·부역명·부분일치 보정)
-  const resolveName = (input) => {
+  // 입력 → {type:'data'|'nodata'|null, name}
+  // 정확 매칭(데이터역 → 데이터없음역) 우선, 그 다음 부분일치.
+  const resolve = (input) => {
     const t = (input || "").trim();
-    if (!t) return null;
-    if (data.stations[t]) return t;
+    if (!t) return { type: null };
     const a = t.replace(/역$/, "");
-    if (data.stations[a]) return a;
-    return (
-      names.find((n) => n.split("(")[0] === t || n.split("(")[0] === a) ||
-      names.find((n) => n.startsWith(t) || n.startsWith(a)) ||
-      null
+    if (data.stations[t]) return { type: "data", name: t };
+    if (data.stations[a]) return { type: "data", name: a };
+    if (NO_DATA[t]) return { type: "nodata", name: t };
+    if (NO_DATA[a]) return { type: "nodata", name: a };
+    const baseHit = names.find(
+      (n) => n.split("(")[0] === t || n.split("(")[0] === a
     );
+    if (baseHit) return { type: "data", name: baseHit };
+    const sw = names.find((n) => n.startsWith(t) || n.startsWith(a));
+    if (sw) return { type: "data", name: sw };
+    const swn = Object.keys(NO_DATA).find(
+      (n) => n.startsWith(t) || n.startsWith(a)
+    );
+    if (swn) return { type: "nodata", name: swn };
+    return { type: null };
   };
 
   // 경로 계산
   const compute = () => {
     setError("");
-    const o = resolveName(origin);
-    const d = resolveName(dest);
-    const missing = [!o && origin, !d && dest].filter(Boolean);
-    if (missing.length) {
-      setError(
-        `‘${missing.join(", ")}’ 역을 찾을 수 없습니다. 이 지도는 서울교통공사 1~8호선 운영 역만 포함합니다(회기·외대앞 등 코레일 운영 구간 제외).`
-      );
+    const ro = resolve(origin);
+    const rd = resolve(dest);
+    const msgs = [];
+    for (const [val, r] of [
+      [origin, ro],
+      [dest, rd],
+    ]) {
+      if (r.type === "nodata") {
+        msgs.push(
+          `‘${val.trim()}’은(는) 코레일 운영 구간이라 데이터가 없습니다. 1호선 데이터는 서울교통공사 구간(청량리~서울역)까지만 있어요. 가장 가까운 데이터 보유역 ‘${NO_DATA[r.name]}’을(를) 검색해 보세요.`
+        );
+      } else if (r.type === null) {
+        msgs.push(
+          `‘${val.trim()}’ 역을 찾을 수 없습니다. 서울교통공사 1~8호선 역명을 확인해 주세요.`
+        );
+      }
+    }
+    if (msgs.length) {
+      setError(msgs.join(" "));
       setRoutes([]);
       return;
     }
+    const o = ro.name;
+    const d = rd.name;
     if (o !== origin) setOrigin(o);
     if (d !== dest) setDest(d);
     if (o === d) {
@@ -224,6 +248,11 @@ export default function SubwayExplorer() {
           {names.map((n) => (
             <option key={n} value={n} />
           ))}
+          {Object.keys(NO_DATA)
+            .filter((n) => !data.stations[n])
+            .map((n) => (
+              <option key={n} value={n} label={`${n} — 데이터 없음(코레일)`} />
+            ))}
         </datalist>
         <div className={styles.field}>
           <label>시간대</label>
