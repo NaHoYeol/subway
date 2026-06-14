@@ -418,29 +418,29 @@ export default function Page() {
           <div className={styles.teamTitle}>취재팀</div>
           <ul className={styles.teamList}>
             <li>
-              <span>김지우</span>
+              <span>김지우 기자</span>
               <a href="mailto:pucca125@khu.ac.kr">pucca125@khu.ac.kr</a>
             </li>
             <li>
-              <span>나호열</span>
+              <span>나호열 기자</span>
               <a href="mailto:makehomehappy99@khu.ac.kr">
                 makehomehappy99@khu.ac.kr
               </a>
             </li>
             <li>
-              <span>신유빈</span>
+              <span>신유빈 기자</span>
               <a href="mailto:yuvin05@khu.ac.kr">yuvin05@khu.ac.kr</a>
             </li>
             <li>
-              <span>안젤리나</span>
+              <span>안젤리나 기자</span>
               <a href="mailto:liangeli0208@khu.ac.kr">liangeli0208@khu.ac.kr</a>
             </li>
             <li>
-              <span>염정민</span>
+              <span>염정민 기자</span>
               <a href="mailto:duawjdals02@khu.ac.kr">duawjdals02@khu.ac.kr</a>
             </li>
             <li>
-              <span>QIAN YE</span>
+              <span>QIAN YE 기자</span>
               <a href="mailto:eyz040801@gmail.com">eyz040801@gmail.com</a>
             </li>
           </ul>
