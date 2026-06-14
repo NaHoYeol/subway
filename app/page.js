@@ -426,6 +426,37 @@ export default function Page() {
       </article>
 
       <footer className={styles.footer}>
+        <div className={styles.team}>
+          <div className={styles.teamTitle}>취재팀</div>
+          <ul className={styles.teamList}>
+            <li>
+              <span>김지우</span>
+              <a href="mailto:pucca125@khu.ac.kr">pucca125@khu.ac.kr</a>
+            </li>
+            <li>
+              <span>나호열</span>
+              <a href="mailto:makehomehappy99@khu.ac.kr">
+                makehomehappy99@khu.ac.kr
+              </a>
+            </li>
+            <li>
+              <span>신유빈</span>
+              <a href="mailto:yuvin05@khu.ac.kr">yuvin05@khu.ac.kr</a>
+            </li>
+            <li>
+              <span>안젤리나</span>
+              <a href="mailto:liangeli0208@khu.ac.kr">liangeli0208@khu.ac.kr</a>
+            </li>
+            <li>
+              <span>염정민</span>
+              <a href="mailto:duawjdals02@khu.ac.kr">duawjdals02@khu.ac.kr</a>
+            </li>
+            <li>
+              <span>QIAN YE</span>
+              <a href="mailto:eyz040801@gmail.com">eyz040801@gmail.com</a>
+            </li>
+          </ul>
+        </div>
         데이터 저널리즘 · 서울 지하철 노인 무임승차 취재팀 · 2026
         <br />
         데이터 출처: 서울교통공사 역별·시간대별 승하차 인원 정보(2024), 연합뉴스,
