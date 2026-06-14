@@ -357,7 +357,7 @@ export default function Page() {
 
         {/* ===== 대책 ===== */}
         <section className={styles.section}>
-          <h2 className={styles.h2}>사회 공존의 가치를 일 순위로</h2>
+          <h2 className={styles.h2}>사회 공존의 가치를 1순위로</h2>
 
           <p>
             우리의 데이터 분석과 현장 인터뷰 결과를 종합하면 노인 무임승차를
