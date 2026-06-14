@@ -237,6 +237,24 @@ export default function SubwayExplorer() {
     mapRef.current.fitBounds(L.latLngBounds(latlngs).pad(0.2));
   }, [ready, routes, sel, dist]);
 
+  // 카카오/네이버 대중교통 길찾기 딥링크 (선택 경로의 출발·도착역 기준)
+  const rsel = routes[sel];
+  const clean = (n) => n.split("(")[0];
+  let kakaoUrl = "#";
+  let naverUrl = "#";
+  if (rsel) {
+    const oName = rsel.stations[0];
+    const dName = rsel.stations[rsel.stations.length - 1];
+    const o = data.stations[oName];
+    const d = data.stations[dName];
+    kakaoUrl = `https://map.kakao.com/?sName=${encodeURIComponent(
+      clean(oName) + "역"
+    )}&eName=${encodeURIComponent(clean(dName) + "역")}`;
+    naverUrl = `https://map.naver.com/p/directions/${o.lng},${o.lat},${encodeURIComponent(
+      clean(oName)
+    )},,/${d.lng},${d.lat},${encodeURIComponent(clean(dName))},,/-/transit`;
+  }
+
   return (
     <figure className={styles.wrap}>
       <div className={styles.controls}>
@@ -391,6 +409,28 @@ export default function SubwayExplorer() {
           <i style={{ background: colorForP(0.73) }} />
           <i style={{ background: colorForP(0.96) }} />
           <span>낮음(파랑) → 높음(빨강)</span>
+        </div>
+      )}
+
+      {rsel && (
+        <div className={styles.extLinks}>
+          <span>정확한 대중교통 길찾기 →</span>
+          <a
+            className={`${styles.extBtn} ${styles.kakao}`}
+            href={kakaoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            카카오맵
+          </a>
+          <a
+            className={`${styles.extBtn} ${styles.naver}`}
+            href={naverUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            네이버지도
+          </a>
         </div>
       )}
 
