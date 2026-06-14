@@ -194,9 +194,9 @@ export default function SubwayExplorer() {
     return { sorted: arr, mean: Math.round(mean * 10) / 10 };
   }, []);
 
-  // 역별 값은 선택 요일·선택 시간대, 기준 분포는 위의 단일 평일 풀.
+  // 표시 값은 최근 1주일 API(apiShare), 색·상위% 기준 분포는 2024 평일 풀.
   const dist = useMemo(() => {
-    const sel = hourShares(data, hour, daytype);
+    const sel = hourShares(data, hour, daytype, "apiShare");
     return { map: sel.map, sorted: baseline.sorted };
   }, [hour, daytype, baseline]);
 
@@ -465,7 +465,7 @@ export default function SubwayExplorer() {
       <div className={styles.mapWrap}>
         <div className={styles.mapBox} ref={mapEl} />
         <div className={styles.mapBadge}>
-          <span>평일 전체(전 시간대) 평균 노인 비중 · 색상 기준</span>
+          <span>2024년 평일 전체 평균 노인 비중 · 색상 기준</span>
           <strong>{baseline.mean}%</strong>
         </div>
       </div>
@@ -518,25 +518,27 @@ export default function SubwayExplorer() {
               {summary.verdict.label}
             </span>
             <strong>
-              이 구간의 {daytype === "wd" ? "평일" : "주말"} 노인 비중은 평일
-              전체 분포 기준 <em>상위 {summary.top}%</em>
+              이 구간의 최근 1주일 {daytype === "wd" ? "평일" : "주말"} 노인
+              비중은 2024년 평일 분포 기준 <em>상위 {summary.top}%</em>
             </strong>
           </div>
           <p className={styles.resultDetail}>
-            경유 {route.stops}개 역의 {daytype === "wd" ? "평일" : "주말"} 평균
-            노인 비중 {summary.avg.toFixed(1)}% (평일 전체 평균 {baseline.mean}
-            %). 색과 ‘상위 %’는 시간대·요일을 같은 잣대로 비교하도록{" "}
-            <b>평일 전 시간대·전 역</b>을 모은 하나의 분포를 기준으로 한다.
-            빨갈수록 그 기준보다 노인 비중이 높은 역, 파랄수록 낮은 역이다.
+            경유 {route.stops}개 역의 최근 1주일{" "}
+            {daytype === "wd" ? "평일" : "주말"} 평균 노인 비중{" "}
+            {summary.avg.toFixed(1)}% (2024년 평일 전체 평균 {baseline.mean}%).
+            표시 값은 최근 1주일 데이터, 색·‘상위 %’는 시간대·요일을 같은 잣대로
+            비교하도록 <b>2024년 평일 전 시간대·전 역</b>을 모은 분포를 기준으로
+            한다. 빨갈수록 그 기준보다 노인 비중이 높은 역, 파랄수록 낮은 역이다.
           </p>
         </div>
       )}
 
       <figcaption className={styles.caption}>
         승차역·환승역·하차역을 직접 지정하면 그 경로의 노인 비중을 지도에
-        표시한다. 색은 같은 시간대 전체 역 분포에서의 백분위(상위 %)를 뜻한다. ⚠
+        표시한다. 색은 2024년 평일 전체 분포에서의 백분위(상위 %)를 뜻한다. ⚠
         경유역 승하차 기반 근사치이며, 열차 내 실제 승객 구성과는 다를 수 있다.
-        (자료: 서울교통공사 2024년 역별·시간대별 노인·전체 승하차, 1~8호선)
+        (표시 값: 서울교통공사_역별승하차인원 — 공공데이터포털 API, 최근 1주일
+        평균 · 색·상위%·평균 기준: 2024년 평일 분포 · 서울교통공사 1~8호선)
       </figcaption>
     </figure>
   );

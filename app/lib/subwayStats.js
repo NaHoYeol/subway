@@ -1,11 +1,12 @@
 // 시간대·평일/주말별 노인 비중 분포에서 백분위(상위 %) 및 색상 계산.
 
-export function hourShares(data, hour, daytype) {
-  // 해당 시간대/요일구분에서 (역 -> 비중) 맵과 정렬된 비중 배열 반환
+export function hourShares(data, hour, daytype, field = "share") {
+  // 해당 시간대/요일구분에서 (역 -> 비중) 맵과 정렬된 비중 배열 반환.
+  // field: 'share'(2024) | 'apiShare'(최근 1주일 API)
   const map = new Map();
   const arr = [];
   for (const [name, s] of Object.entries(data.stations)) {
-    const v = s.share?.[daytype]?.[String(hour)];
+    const v = s[field]?.[daytype]?.[String(hour)];
     if (typeof v === "number") {
       map.set(name, v);
       arr.push(v);
