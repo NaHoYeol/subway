@@ -442,7 +442,18 @@ export default function SubwayExplorer() {
 
       {error && <div className={styles.error}>{error}</div>}
 
-      <div className={styles.mapBox} ref={mapEl} />
+      <div className={styles.mapWrap}>
+        <div className={styles.mapBox} ref={mapEl} />
+        <div className={styles.mapBadge}>
+          <span>
+            {daytype === "wd" ? "평일" : "주말"} {hour}시 해당 시간대 평균 노인
+            비중
+          </span>
+          <strong>
+            {data.baseline2024?.[daytype]?.[String(hour)]?.mean ?? "-"}%
+          </strong>
+        </div>
+      </div>
 
       {route && (
         <div className={styles.legend}>
