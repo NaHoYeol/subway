@@ -229,7 +229,7 @@ export default function Page() {
 
           <figure className={styles.figure}>
             <Image
-              src="/market.jpg"
+              src="/market-v2.jpg"
               alt="경동시장에서 장을 보는 노인들"
               width={1536}
               height={2048}
