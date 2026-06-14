@@ -552,11 +552,6 @@ export default function SubwayExplorer() {
         </div>
       )}
 
-      <figcaption className={styles.caption}>
-        색은 2024년 평일 분포에서의 백분위(상위 %). ⚠ 경유역 승하차 기반
-        근사치로 열차 내 실제 구성과 다를 수 있다. (값: 서울교통공사_역별승하차인원
-        API 최근 1주일 · 기준: 2024 평일 · 1~8호선)
-      </figcaption>
     </figure>
   );
 }
