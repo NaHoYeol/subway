@@ -9,8 +9,8 @@ export default function Page() {
       {/* ===== HERO ===== */}
       <header className={styles.hero}>
         <Image
-          src="/station.jpg"
-          alt="제기동역과 경동시장에서 체류하는 노인들"
+          src="/hero.jpg"
+          alt="지하철 계단을 오르내리는 시민들"
           fill
           priority
           sizes="100vw"
