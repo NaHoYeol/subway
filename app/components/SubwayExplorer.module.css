@@ -193,17 +193,14 @@
 }
 
 .notice {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
   padding: 9px 16px;
   background: #fff;
   border-left: 1px solid var(--rule);
   border-right: 1px solid var(--rule);
   font-size: 12.5px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--text-muted);
+  word-break: keep-all;
 }
 
 .notice b {
