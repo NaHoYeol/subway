@@ -22,19 +22,10 @@ export default function Page() {
             서울 지하철 노령층의 이동과 체류,
             <br />그 실태를 추적하다
           </h1>
-          <p className={styles.heroCaption}>
-            제기동역과 경동시장에서 노인들이 체류하는 모습이다.
-          </p>
         </div>
       </header>
 
       <article className={styles.article}>
-        <div className={styles.byline}>
-          <span>취재 · 김지우, 염정민</span>
-          <span>데이터 분석 · 취재팀</span>
-          <span>2026</span>
-        </div>
-
         {/* ===== 도입 ===== */}
         <p className={styles.lead}>
           “청년들 눈치 봐요. 지하철 탈 때마다 괜히 표정부터 살피게 돼요.”
