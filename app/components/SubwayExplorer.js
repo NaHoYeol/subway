@@ -139,11 +139,18 @@ export default function SubwayExplorer() {
     setSel(0);
   };
 
-  // 최초 1회 자동 계산
+  // 출발·도착이 모두 유효한 데이터역이면 즉시 경로 갱신
   useEffect(() => {
-    compute();
+    const ro = resolve(origin);
+    const rd = resolve(dest);
+    if (ro.type === "data" && rd.type === "data" && ro.name !== rd.name) {
+      const r = findRoutes(graph, ro.name, rd.name, 3);
+      setRoutes(r);
+      setSel(0);
+      setError(r.length ? "" : "경로를 찾지 못했습니다.");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [origin, dest]);
 
   // 현재 시간대 분포
   const dist = useMemo(
