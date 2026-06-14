@@ -224,12 +224,12 @@ export default function Page() {
 
         {/* ===== 지캉스 ===== */}
         <section className={styles.section}>
-          <h3 className={styles.h3}>‘지캉스’는 정말 의미 없는 이동일까</h3>
+          <h3 className={styles.h3}>목적지 없이 시간만 보내는 ‘지캉스’?</h3>
 
           <p>
             온라인에서는 노인들이 무료 지하철을 이용해 특별한 목적 없이 장시간
             이동한다는, 이른바 ‘지캉스’ 논란도 꾸준히 제기된다. 하지만 취재진이
-            만난 노인들의 이동은 단순한 시간 보내기와는 거리가 있었다.
+            만난 노인들의 지하철 탑승은 단순한 시간 보내기와는 거리가 있었다.
           </p>
 
           <figure className={styles.figure}>
