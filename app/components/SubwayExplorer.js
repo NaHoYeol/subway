@@ -289,6 +289,30 @@ export default function SubwayExplorer() {
         </button>
       </div>
 
+      <div className={styles.notice}>
+        <span>
+          ※ 1호선은 <b>청량리~서울역(서울교통공사)</b> 구간만 데이터가 있습니다.
+          청량리 이북(회기·외대앞 등)과 9호선은 코레일·타 운영사 구간이라
+          데이터가 없어요.
+        </span>
+        {resolve(origin).type === "nodata" && (
+          <button
+            className={styles.suggest}
+            onClick={() => setOrigin(NO_DATA[resolve(origin).name])}
+          >
+            승차역 → ‘{NO_DATA[resolve(origin).name]}’ 선택
+          </button>
+        )}
+        {resolve(dest).type === "nodata" && (
+          <button
+            className={styles.suggest}
+            onClick={() => setDest(NO_DATA[resolve(dest).name])}
+          >
+            하차역 → ‘{NO_DATA[resolve(dest).name]}’ 선택
+          </button>
+        )}
+      </div>
+
       {error && <div className={styles.error}>{error}</div>}
 
       {routes.length > 0 && (
