@@ -297,10 +297,10 @@ export default function SubwayExplorer() {
   }
 
   // 경유지 입력 행 렌더
-  const renderRow = (label, value, onChange, onRemove, placeholder) => {
+  const renderRow = (label, value, onChange, onRemove, placeholder, rowKey) => {
     const r = resolve(value);
     return (
-      <div className={styles.wpRow}>
+      <div className={styles.wpRow} key={rowKey}>
         <span className={styles.wpLabel}>{label}</span>
         <AutoInput
           value={value}
@@ -329,7 +329,14 @@ export default function SubwayExplorer() {
     <figure className={styles.wrap}>
       <div className={styles.controls}>
         <div className={styles.waypoints}>
-          {renderRow("승차역", boarding, setBoarding, null, "역을 선택하세요")}
+          {renderRow(
+            "승차역",
+            boarding,
+            setBoarding,
+            null,
+            "역을 선택하세요",
+            "boarding"
+          )}
 
           {transfers.map((t, i) =>
             renderRow(
@@ -338,7 +345,8 @@ export default function SubwayExplorer() {
               (v) =>
                 setTransfers((arr) => arr.map((x, j) => (j === i ? v : x))),
               () => setTransfers((arr) => arr.filter((_, j) => j !== i)),
-              "환승역을 선택하세요"
+              "환승역을 선택하세요",
+              `tf-${i}`
             )
           )}
 
@@ -349,7 +357,14 @@ export default function SubwayExplorer() {
             + 환승역 추가
           </button>
 
-          {renderRow("하차역", alighting, setAlighting, null, "역을 선택하세요")}
+          {renderRow(
+            "하차역",
+            alighting,
+            setAlighting,
+            null,
+            "역을 선택하세요",
+            "alighting"
+          )}
         </div>
 
         <div className={styles.options}>
