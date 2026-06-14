@@ -199,7 +199,7 @@ export default function SubwayExplorer() {
       const L = (await import("leaflet")).default;
       Lref.current = L;
       if (!mapEl.current || mapRef.current) return;
-      map = L.map(mapEl.current, { scrollWheelZoom: false }).setView(
+      map = L.map(mapEl.current, { scrollWheelZoom: true }).setView(
         [37.55, 127.0],
         11
       );
