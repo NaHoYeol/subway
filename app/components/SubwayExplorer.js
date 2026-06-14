@@ -178,12 +178,27 @@ export default function SubwayExplorer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [boarding, transfers, alighting]);
 
-  // 역별 값은 선택 요일, '많고 적음'(색·백분위) 기준 분포는 항상 평일로 고정.
+  // 색·상위%의 단일 기준: 평일 전 시간대·전 역의 노인 비중을 한데 모은 분포.
+  const baseline = useMemo(() => {
+    const arr = [];
+    for (const s of Object.values(data.stations)) {
+      const wd = s.share?.wd;
+      if (!wd) continue;
+      for (const h of HOURS) {
+        const v = wd[String(h)];
+        if (typeof v === "number") arr.push(v);
+      }
+    }
+    arr.sort((a, b) => a - b);
+    const mean = arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+    return { sorted: arr, mean: Math.round(mean * 10) / 10 };
+  }, []);
+
+  // 역별 값은 선택 요일·선택 시간대, 기준 분포는 위의 단일 평일 풀.
   const dist = useMemo(() => {
     const sel = hourShares(data, hour, daytype);
-    const base = hourShares(data, hour, "wd");
-    return { map: sel.map, sorted: base.sorted };
-  }, [hour, daytype]);
+    return { map: sel.map, sorted: baseline.sorted };
+  }, [hour, daytype, baseline]);
 
   const summary = useMemo(() => {
     if (!route) return null;
@@ -450,10 +465,8 @@ export default function SubwayExplorer() {
       <div className={styles.mapWrap}>
         <div className={styles.mapBox} ref={mapEl} />
         <div className={styles.mapBadge}>
-          <span>{hour}시 평일 전체 평균 노인 비중 (색상 기준)</span>
-          <strong>
-            {data.baseline2024?.wd?.[String(hour)]?.mean ?? "-"}%
-          </strong>
+          <span>평일 전체(전 시간대) 평균 노인 비중 · 색상 기준</span>
+          <strong>{baseline.mean}%</strong>
         </div>
       </div>
 
@@ -505,16 +518,16 @@ export default function SubwayExplorer() {
               {summary.verdict.label}
             </span>
             <strong>
-              이 구간의 {daytype === "wd" ? "평일" : "주말"} 노인 비중은 {hour}시
-              평일 분포 기준 <em>상위 {summary.top}%</em>
+              이 구간의 {daytype === "wd" ? "평일" : "주말"} 노인 비중은 평일
+              전체 분포 기준 <em>상위 {summary.top}%</em>
             </strong>
           </div>
           <p className={styles.resultDetail}>
             경유 {route.stops}개 역의 {daytype === "wd" ? "평일" : "주말"} 평균
-            노인 비중 {summary.avg.toFixed(1)}% (평일 전체 역 평균{" "}
-            {data.baseline2024?.wd?.[String(hour)]?.mean ?? "-"}%). 색과 ‘상위
-            %’는 평일/주말 비교가 가능하도록 모두 <b>평일 분포</b>를 기준으로 한다.
-            빨갈수록 평일 기준 노인 비중이 높은 역, 파랄수록 낮은 역이다.
+            노인 비중 {summary.avg.toFixed(1)}% (평일 전체 평균 {baseline.mean}
+            %). 색과 ‘상위 %’는 시간대·요일을 같은 잣대로 비교하도록{" "}
+            <b>평일 전 시간대·전 역</b>을 모은 하나의 분포를 기준으로 한다.
+            빨갈수록 그 기준보다 노인 비중이 높은 역, 파랄수록 낮은 역이다.
           </p>
         </div>
       )}
