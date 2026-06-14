@@ -14,7 +14,7 @@ const notoSerif = Noto_Serif_KR({
 });
 
 export const metadata = {
-  title: "서울 지하철 노령층의 이동과 체류, 그 실태를 추적하다",
+  title: "“청년 눈치 보여 출근길은 피해요”… 죄인이 된 지하철의 어르신들",
   description:
     "데이터와 현장 취재로 들여다본 노인 무임승차 논쟁 — 청년과 노인 사이, 통계가 말하는 진실.",
 };
