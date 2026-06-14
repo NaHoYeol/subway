@@ -9,7 +9,7 @@ export default function Page() {
       {/* ===== HERO ===== */}
       <header className={styles.hero}>
         <Image
-          src="/hero-v4.jpg"
+          src="/hero-v5.jpg"
           alt="지하철 계단을 오르내리는 시민들"
           fill
           priority
