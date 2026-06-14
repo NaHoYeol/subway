@@ -415,7 +415,7 @@ export default function Page() {
 
       <footer className={styles.footer}>
         <div className={styles.team}>
-          <div className={styles.teamTitle}>취재팀</div>
+          <div className={styles.teamTitle}>데이터저널리즘 2조 취재팀</div>
           <ul className={styles.teamList}>
             <li>
               <span>김지우 기자</span>
