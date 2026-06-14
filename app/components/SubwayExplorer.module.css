@@ -3,14 +3,86 @@
 }
 
 .controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 12px;
   padding: 16px;
   background: #f6f6f7;
   border: 1px solid var(--rule);
   border-radius: 12px 12px 0 0;
+}
+
+.waypoints {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wpRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wpLabel {
+  flex: none;
+  width: 70px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-soft);
+}
+
+.wpRow input {
+  flex: 1;
+  max-width: 320px;
+  font-size: 15px;
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  font-family: inherit;
+}
+
+.wpRemove {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #999;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.wpRemove:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.addTransfer {
+  align-self: flex-start;
+  margin-left: 80px;
+  border: 1px dashed #b9b9b9;
+  background: #fff;
+  color: var(--text-soft);
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.addTransfer:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e2e2;
 }
 
 .field {

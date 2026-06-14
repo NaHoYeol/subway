@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import data from "../_data/subway.json";
-import { buildGraph, findRoutes } from "../lib/subwayRouting";
+import { stitchRoute } from "../lib/subwayRouting";
 import {
   hourShares,
   percentile,
@@ -24,16 +24,13 @@ function verdict(top) {
 }
 
 export default function SubwayExplorer() {
-  const graph = useMemo(() => buildGraph(data), []);
   const names = useMemo(() => Object.keys(data.stations).sort(), []);
 
-  const [origin, setOrigin] = useState("");
-  const [dest, setDest] = useState("");
+  const [boarding, setBoarding] = useState("");
+  const [transfers, setTransfers] = useState([]); // 환승역 입력들
+  const [alighting, setAlighting] = useState("");
   const [hour, setHour] = useState(8);
   const [daytype, setDaytype] = useState("wd");
-  const [routes, setRoutes] = useState([]);
-  const [sel, setSel] = useState(0);
-  const [error, setError] = useState("");
 
   const mapEl = useRef(null);
   const mapRef = useRef(null);
@@ -41,7 +38,77 @@ export default function SubwayExplorer() {
   const layerRef = useRef(null);
   const [ready, setReady] = useState(false);
 
-  // 지도 초기화 (클라이언트 전용)
+  // 입력 → {type:'data'|'nodata'|null, name}
+  const resolve = (input) => {
+    const t = (input || "").trim();
+    if (!t) return { type: null };
+    const a = t.replace(/역$/, "");
+    if (data.stations[t]) return { type: "data", name: t };
+    if (data.stations[a]) return { type: "data", name: a };
+    if (NO_DATA[t]) return { type: "nodata", name: t };
+    if (NO_DATA[a]) return { type: "nodata", name: a };
+    const baseHit = names.find(
+      (n) => n.split("(")[0] === t || n.split("(")[0] === a
+    );
+    if (baseHit) return { type: "data", name: baseHit };
+    const sw = names.find((n) => n.startsWith(t) || n.startsWith(a));
+    if (sw) return { type: "data", name: sw };
+    const swn = Object.keys(NO_DATA).find(
+      (n) => n.startsWith(t) || n.startsWith(a)
+    );
+    if (swn) return { type: "nodata", name: swn };
+    return { type: null };
+  };
+
+  // 사용자가 지정한 경유지로 경로 구성(+검증)
+  const { route, error } = useMemo(() => {
+    if (!boarding.trim() || !alighting.trim())
+      return { route: null, error: "" };
+    const raw = [boarding, ...transfers, alighting].filter((w) => w.trim());
+    const resolved = [];
+    for (const w of raw) {
+      const r = resolve(w);
+      if (r.type === "nodata")
+        return {
+          route: null,
+          error: `‘${w.trim()}’은(는) 타 운영사(코레일·9호선 등) 구간이라 데이터가 없습니다. 가장 가까운 데이터 보유역 ‘${NO_DATA[r.name]}’을(를) 입력해 주세요.`,
+        };
+      if (r.type === null)
+        return {
+          route: null,
+          error: `‘${w.trim()}’ 역을 찾을 수 없습니다. 서울교통공사 1~8호선 역명을 확인해 주세요.`,
+        };
+      resolved.push(r.name);
+    }
+    const wps = resolved.filter((n, i) => i === 0 || n !== resolved[i - 1]);
+    if (wps.length < 2) return { route: null, error: "" };
+    const res = stitchRoute(data, wps);
+    if (res.error === "transfer")
+      return {
+        route: null,
+        error:
+          "오류! 환승역을 정확하게 기입해주세요. 선택한 역들이 한 노선으로 이어지지 않습니다.",
+      };
+    if (res.error) return { route: null, error: "" };
+    return { route: res, error: "" };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [boarding, transfers, alighting]);
+
+  const dist = useMemo(() => hourShares(data, hour, daytype), [hour, daytype]);
+
+  const summary = useMemo(() => {
+    if (!route) return null;
+    const vals = route.stations
+      .map((n) => dist.map.get(n))
+      .filter((v) => typeof v === "number");
+    if (!vals.length) return null;
+    const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
+    const p = percentile(dist.sorted, avg);
+    const top = topPercent(p);
+    return { avg, top, verdict: verdict(top) };
+  }, [route, dist]);
+
+  // 지도 초기화
   useEffect(() => {
     let map;
     (async () => {
@@ -72,122 +139,16 @@ export default function SubwayExplorer() {
     };
   }, []);
 
-  // 입력 → {type:'data'|'nodata'|null, name}
-  // 정확 매칭(데이터역 → 데이터없음역) 우선, 그 다음 부분일치.
-  const resolve = (input) => {
-    const t = (input || "").trim();
-    if (!t) return { type: null };
-    const a = t.replace(/역$/, "");
-    if (data.stations[t]) return { type: "data", name: t };
-    if (data.stations[a]) return { type: "data", name: a };
-    if (NO_DATA[t]) return { type: "nodata", name: t };
-    if (NO_DATA[a]) return { type: "nodata", name: a };
-    const baseHit = names.find(
-      (n) => n.split("(")[0] === t || n.split("(")[0] === a
-    );
-    if (baseHit) return { type: "data", name: baseHit };
-    const sw = names.find((n) => n.startsWith(t) || n.startsWith(a));
-    if (sw) return { type: "data", name: sw };
-    const swn = Object.keys(NO_DATA).find(
-      (n) => n.startsWith(t) || n.startsWith(a)
-    );
-    if (swn) return { type: "nodata", name: swn };
-    return { type: null };
-  };
-
-  // 경로 계산
-  const compute = () => {
-    setError("");
-    const ro = resolve(origin);
-    const rd = resolve(dest);
-    const msgs = [];
-    for (const [val, r] of [
-      [origin, ro],
-      [dest, rd],
-    ]) {
-      if (r.type === "nodata") {
-        msgs.push(
-          `‘${val.trim()}’은(는) 타 운영사(코레일·9호선 등) 구간이라 데이터가 없습니다. 이 지도는 서울교통공사 1~8호선만 포함합니다. 가장 가까운 데이터 보유역 ‘${NO_DATA[r.name]}’을(를) 검색해 보세요.`
-        );
-      } else if (r.type === null) {
-        msgs.push(
-          `‘${val.trim()}’ 역을 찾을 수 없습니다. 서울교통공사 1~8호선 역명을 확인해 주세요.`
-        );
-      }
-    }
-    if (msgs.length) {
-      setError(msgs.join(" "));
-      setRoutes([]);
-      return;
-    }
-    const o = ro.name;
-    const d = rd.name;
-    if (o !== origin) setOrigin(o);
-    if (d !== dest) setDest(d);
-    if (o === d) {
-      setError("출발역과 도착역이 같습니다.");
-      setRoutes([]);
-      return;
-    }
-    const r = findRoutes(graph, o, d, 3);
-    if (!r.length) {
-      setError("경로를 찾지 못했습니다.");
-      setRoutes([]);
-      return;
-    }
-    setRoutes(r);
-    setSel(0);
-  };
-
-  // 출발·도착이 모두 유효한 데이터역이면 즉시 경로 갱신
-  useEffect(() => {
-    const ro = resolve(origin);
-    const rd = resolve(dest);
-    if (ro.type === "data" && rd.type === "data" && ro.name !== rd.name) {
-      const r = findRoutes(graph, ro.name, rd.name, 3);
-      setRoutes(r);
-      setSel(0);
-      setError(r.length ? "" : "경로를 찾지 못했습니다.");
-    } else {
-      // 아직 두 역이 모두 선택되지 않음 → 경로 비우고 지도만 표시
-      setRoutes([]);
-      setError("");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [origin, dest]);
-
-  // 현재 시간대 분포
-  const dist = useMemo(
-    () => hourShares(data, hour, daytype),
-    [hour, daytype]
-  );
-
-  // 선택 경로 요약
-  const summary = useMemo(() => {
-    const route = routes[sel];
-    if (!route) return null;
-    const vals = route.stations
-      .map((n) => dist.map.get(n))
-      .filter((v) => typeof v === "number");
-    if (!vals.length) return null;
-    const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
-    const p = percentile(dist.sorted, avg);
-    const top = topPercent(p);
-    return { avg, p, top, verdict: verdict(top) };
-  }, [routes, sel, dist]);
-
   // 지도 그리기
   useEffect(() => {
     if (!ready) return;
     const L = Lref.current;
     const layer = layerRef.current;
     layer.clearLayers();
-    if (!routes[sel]) return;
-    const route = routes[sel];
+    if (!route) return;
     const S = data.stations;
     const latlngs = route.stations.map((n) => [S[n].lat, S[n].lng]);
 
-    // 어두운 외곽선(casing) — 색과 무관하게 경로가 항상 보이도록
     L.polyline(latlngs, {
       color: "#2a2a2a",
       weight: 11,
@@ -196,12 +157,9 @@ export default function SubwayExplorer() {
       lineCap: "round",
     }).addTo(layer);
 
-    // 구간(역-역)별 그라데이션 선 (외곽선 위에 올림)
     for (let i = 0; i < route.stations.length - 1; i++) {
-      const a = route.stations[i];
-      const b = route.stations[i + 1];
-      const va = dist.map.get(a);
-      const vb = dist.map.get(b);
+      const va = dist.map.get(route.stations[i]);
+      const vb = dist.map.get(route.stations[i + 1]);
       const hasData = typeof va === "number" && typeof vb === "number";
       const pa = percentile(dist.sorted, va ?? 0);
       const pb = percentile(dist.sorted, vb ?? 0);
@@ -213,15 +171,15 @@ export default function SubwayExplorer() {
       }).addTo(layer);
     }
 
-    // 역 마커
     route.stations.forEach((n, i) => {
       const v = dist.map.get(n);
       const p = percentile(dist.sorted, v ?? 0);
       const isEnd = i === 0 || i === route.stations.length - 1;
+      const isTransfer = route.transferStations.includes(n);
       L.circleMarker([S[n].lat, S[n].lng], {
-        radius: isEnd ? 8 : 5,
+        radius: isEnd ? 8 : isTransfer ? 7 : 5,
         color: "#222",
-        weight: isEnd ? 2 : 1,
+        weight: isEnd || isTransfer ? 2 : 1,
         fillColor: typeof v === "number" ? colorForP(p) : "#bbb",
         fillOpacity: 0.95,
       })
@@ -235,47 +193,81 @@ export default function SubwayExplorer() {
     });
 
     mapRef.current.fitBounds(L.latLngBounds(latlngs).pad(0.2));
-  }, [ready, routes, sel, dist]);
+  }, [ready, route, dist]);
 
-  // 카카오/네이버 대중교통 길찾기 딥링크 (선택 경로의 출발·도착역 기준)
-  const rsel = routes[sel];
-  const clean = (n) => n.split("(")[0];
+  // 딥링크
   let kakaoUrl = "#";
   let naverUrl = "#";
-  if (rsel) {
-    const oName = rsel.stations[0];
-    const dName = rsel.stations[rsel.stations.length - 1];
-    const o = data.stations[oName];
-    const d = data.stations[dName];
+  if (route) {
+    const clean = (n) => n.split("(")[0];
+    const oN = route.stations[0];
+    const dN = route.stations[route.stations.length - 1];
+    const o = data.stations[oN];
+    const d = data.stations[dN];
     kakaoUrl = `https://map.kakao.com/?sName=${encodeURIComponent(
-      clean(oName) + "역"
-    )}&eName=${encodeURIComponent(clean(dName) + "역")}`;
+      clean(oN) + "역"
+    )}&eName=${encodeURIComponent(clean(dN) + "역")}`;
     naverUrl = `https://map.naver.com/p/directions/${o.lng},${o.lat},${encodeURIComponent(
-      clean(oName)
-    )},,/${d.lng},${d.lat},${encodeURIComponent(clean(dName))},,/-/transit`;
+      clean(oN)
+    )},,/${d.lng},${d.lat},${encodeURIComponent(clean(dN))},,/-/transit`;
   }
+
+  // 경유지 입력 행 렌더
+  const renderRow = (label, value, onChange, onRemove, placeholder) => {
+    const r = resolve(value);
+    return (
+      <div className={styles.wpRow}>
+        <span className={styles.wpLabel}>{label}</span>
+        <input
+          list="stnlist"
+          value={value}
+          placeholder={placeholder}
+          onChange={(e) => onChange(e.target.value)}
+        />
+        {r.type === "nodata" && (
+          <button
+            className={styles.suggest}
+            onClick={() => onChange(NO_DATA[r.name])}
+          >
+            ‘{NO_DATA[r.name]}’ 선택
+          </button>
+        )}
+        {onRemove && (
+          <button className={styles.wpRemove} onClick={onRemove} title="삭제">
+            ×
+          </button>
+        )}
+      </div>
+    );
+  };
 
   return (
     <figure className={styles.wrap}>
       <div className={styles.controls}>
-        <div className={styles.field}>
-          <label>승차역</label>
-          <input
-            list="stnlist"
-            value={origin}
-            placeholder="역을 선택하세요"
-            onChange={(e) => setOrigin(e.target.value)}
-          />
+        <div className={styles.waypoints}>
+          {renderRow("승차역", boarding, setBoarding, null, "역을 선택하세요")}
+
+          {transfers.map((t, i) =>
+            renderRow(
+              `환승역 ${i + 1}`,
+              t,
+              (v) =>
+                setTransfers((arr) => arr.map((x, j) => (j === i ? v : x))),
+              () => setTransfers((arr) => arr.filter((_, j) => j !== i)),
+              "환승역을 선택하세요"
+            )
+          )}
+
+          <button
+            className={styles.addTransfer}
+            onClick={() => setTransfers((arr) => [...arr, ""])}
+          >
+            + 환승역 추가
+          </button>
+
+          {renderRow("하차역", alighting, setAlighting, null, "역을 선택하세요")}
         </div>
-        <div className={styles.field}>
-          <label>하차역</label>
-          <input
-            list="stnlist"
-            value={dest}
-            placeholder="역을 선택하세요"
-            onChange={(e) => setDest(e.target.value)}
-          />
-        </div>
+
         <datalist id="stnlist">
           {names.map((n) => (
             <option key={n} value={n} />
@@ -286,92 +278,66 @@ export default function SubwayExplorer() {
               <option key={n} value={n} label={`${n} — 데이터 없음(코레일)`} />
             ))}
         </datalist>
-        <div className={styles.field}>
-          <label>시간대</label>
-          <select
-            value={hour}
-            onChange={(e) => setHour(Number(e.target.value))}
-          >
-            {HOURS.map((h) => (
-              <option key={h} value={h}>
-                {h}시~{h + 1}시
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={styles.field}>
-          <label>요일</label>
-          <div className={styles.toggle}>
-            <button
-              className={daytype === "wd" ? styles.on : ""}
-              onClick={() => setDaytype("wd")}
+
+        <div className={styles.options}>
+          <div className={styles.field}>
+            <label>시간대</label>
+            <select
+              value={hour}
+              onChange={(e) => setHour(Number(e.target.value))}
             >
-              평일
-            </button>
-            <button
-              className={daytype === "we" ? styles.on : ""}
-              onClick={() => setDaytype("we")}
-            >
-              주말
-            </button>
+              {HOURS.map((h) => (
+                <option key={h} value={h}>
+                  {h}시~{h + 1}시
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.field}>
+            <label>요일</label>
+            <div className={styles.toggle}>
+              <button
+                className={daytype === "wd" ? styles.on : ""}
+                onClick={() => setDaytype("wd")}
+              >
+                평일
+              </button>
+              <button
+                className={daytype === "we" ? styles.on : ""}
+                onClick={() => setDaytype("we")}
+              >
+                주말
+              </button>
+            </div>
           </div>
         </div>
-        <button className={styles.go} onClick={compute}>
-          경로 보기
-        </button>
       </div>
 
       <div className={styles.notice}>
-        <span>
-          ※ 이 지도는 <b>서울교통공사 1~8호선</b>만 포함합니다. 1호선 청량리
-          이북(회기·외대앞 등)과 9호선·경의중앙선·분당선 등 타 운영사 구간은
-          데이터가 없습니다.
-        </span>
-        {resolve(origin).type === "nodata" && (
-          <button
-            className={styles.suggest}
-            onClick={() => setOrigin(NO_DATA[resolve(origin).name])}
-          >
-            승차역 → ‘{NO_DATA[resolve(origin).name]}’ 선택
-          </button>
-        )}
-        {resolve(dest).type === "nodata" && (
-          <button
-            className={styles.suggest}
-            onClick={() => setDest(NO_DATA[resolve(dest).name])}
-          >
-            하차역 → ‘{NO_DATA[resolve(dest).name]}’ 선택
-          </button>
-        )}
+        ※ 이 지도는 <b>서울교통공사 1~8호선</b>만 포함합니다. 1호선 청량리
+        이북(회기·외대앞 등)과 9호선·경의중앙선·분당선 등 타 운영사 구간은
+        데이터가 없습니다. 직접 환승역을 지정해 경로를 만들어 주세요.
       </div>
 
       {error && <div className={styles.error}>{error}</div>}
 
-      {routes.length > 0 && (
-        <div className={styles.routes}>
-          {routes.map((r, i) => (
-            <button
-              key={i}
-              className={`${styles.routeChip} ${
-                i === sel ? styles.routeOn : ""
-              }`}
-              onClick={() => setSel(i)}
-            >
-              <b>경로 {i + 1}</b> · {r.stops}역 · 환승 {r.transfers}
-              {r.transferStations.length > 0 && (
-                <span className={styles.chipTransfer}>
-                  {" "}
-                  ({r.transferStations.join(", ")})
-                </span>
-              )}
-            </button>
-          ))}
+      <div className={styles.mapBox} ref={mapEl} />
+
+      {route && (
+        <div className={styles.legend}>
+          <span>노인 비중</span>
+          <i style={{ background: colorForP(0.04) }} />
+          <i style={{ background: colorForP(0.27) }} />
+          <i style={{ background: colorForP(0.5) }} />
+          <i style={{ background: colorForP(0.73) }} />
+          <i style={{ background: colorForP(0.96) }} />
+          <span>낮음(파랑) → 높음(빨강)</span>
         </div>
       )}
 
-      {routes[sel] && (
+      {route && (
         <ol className={styles.itinerary}>
-          {routes[sel].legs.map((leg, i) => (
+          {route.legs.map((leg, i) => (
             <li key={i}>
               <span
                 className={styles.legLine}
@@ -390,7 +356,7 @@ export default function SubwayExplorer() {
                   </>
                 )}{" "}
                 → {leg.alight}
-                {i === routes[sel].legs.length - 1 ? " 하차" : ""}
+                {i === route.legs.length - 1 ? " 하차" : ""}
                 <span className={styles.legStops}> ({leg.stops}구간)</span>
               </span>
             </li>
@@ -398,21 +364,7 @@ export default function SubwayExplorer() {
         </ol>
       )}
 
-      <div className={styles.mapBox} ref={mapEl} />
-
-      {routes.length > 0 && (
-        <div className={styles.legend}>
-          <span>노인 비중</span>
-          <i style={{ background: colorForP(0.04) }} />
-          <i style={{ background: colorForP(0.27) }} />
-          <i style={{ background: colorForP(0.5) }} />
-          <i style={{ background: colorForP(0.73) }} />
-          <i style={{ background: colorForP(0.96) }} />
-          <span>낮음(파랑) → 높음(빨강)</span>
-        </div>
-      )}
-
-      {rsel && (
+      {route && (
         <div className={styles.extLinks}>
           <span>정확한 대중교통 길찾기 →</span>
           <a
@@ -446,20 +398,20 @@ export default function SubwayExplorer() {
             </strong>
           </div>
           <p className={styles.resultDetail}>
-            경유 {routes[sel].stops}개 역의 평균 노인 비중 {summary.avg.toFixed(1)}
-            % (전체 역 평균{" "}
-            {data.baseline2024?.[daytype]?.[String(hour)]?.mean ?? "-"}%). 색이
-            빨갈수록 그 시간대에 노인 비중이 높은(상위) 역, 파랄수록 낮은 역이다.
+            경유 {route.stops}개 역의 평균 노인 비중 {summary.avg.toFixed(1)}%
+            (전체 역 평균 {data.baseline2024?.[daytype]?.[String(hour)]?.mean ??
+              "-"}
+            %). 색이 빨갈수록 그 시간대에 노인 비중이 높은(상위) 역, 파랄수록
+            낮은 역이다.
           </p>
         </div>
       )}
 
       <figcaption className={styles.caption}>
-        승·하차역과 시간대를 입력하면 추천 경로(최대 3개)와 경유역의 노인 비중을
-        지도에 표시한다. 색은 같은 시간대 전체 역 분포에서의 백분위(상위 %)를
-        뜻한다. ⚠ 경유역 승하차 기반 근사치이며, 열차 내 실제 승객 구성과는 다를
-        수 있다. (자료: 서울교통공사 2024년 역별·시간대별 노인·전체 승하차,
-        1~8호선)
+        승차역·환승역·하차역을 직접 지정하면 그 경로의 노인 비중을 지도에
+        표시한다. 색은 같은 시간대 전체 역 분포에서의 백분위(상위 %)를 뜻한다. ⚠
+        경유역 승하차 기반 근사치이며, 열차 내 실제 승객 구성과는 다를 수 있다.
+        (자료: 서울교통공사 2024년 역별·시간대별 노인·전체 승하차, 1~8호선)
       </figcaption>
     </figure>
   );

@@ -38,6 +38,51 @@ export function buildGraph(data) {
   return adj;
 }
 
+// 사용자가 고른 경유지(승차-환승…-하차)를 한 노선씩 이어붙임.
+// 연속한 두 역이 같은 노선으로 직접 연결되지 않으면 환승역 누락 → error.
+export function stitchRoute(data, waypoints) {
+  const NET = data.network;
+  const legs = [];
+  const full = [];
+  for (let i = 0; i < waypoints.length - 1; i++) {
+    const a = waypoints[i];
+    const b = waypoints[i + 1];
+    if (a === b) continue;
+    // a,b를 모두 포함하는 노선 중 구간이 가장 짧은 것 선택
+    let best = null;
+    for (const [line, seq] of Object.entries(NET)) {
+      const ia = seq.indexOf(a);
+      const ib = seq.indexOf(b);
+      if (ia >= 0 && ib >= 0) {
+        const span = Math.abs(ia - ib);
+        if (!best || span < best.span) {
+          const slice =
+            ia < ib ? seq.slice(ia, ib + 1) : seq.slice(ib, ia + 1).reverse();
+          best = { line, slice, span };
+        }
+      }
+    }
+    if (!best) return { error: "transfer" };
+    legs.push({
+      line: best.line,
+      board: a,
+      alight: b,
+      stops: best.slice.length - 1,
+    });
+    if (i === 0) full.push(...best.slice);
+    else full.push(...best.slice.slice(1));
+  }
+  if (full.length < 2) return { error: "empty" };
+  const transferStations = waypoints.slice(1, -1);
+  return {
+    stations: full,
+    legs,
+    transferStations,
+    transfers: transferStations.length,
+    stops: full.length,
+  };
+}
+
 function dijkstra(adj, src, dst, blocked) {
   // 홉(역 수) 최소 경로. blocked: Set("a|b")
   const dist = new Map([[src, 0]]);
