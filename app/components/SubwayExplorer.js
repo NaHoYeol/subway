@@ -275,25 +275,46 @@ export default function SubwayExplorer() {
       }).addTo(layer);
     }
 
+    const ROLE = {
+      board: { ko: "승차", color: "#1a7f37", cls: "rBoard" },
+      transfer: { ko: "환승", color: "#d97706", cls: "rTransfer" },
+      alight: { ko: "하차", color: "#7c3aed", cls: "rAlight" },
+    };
     route.stations.forEach((n, i) => {
       const v = dist.map.get(n);
       const p = percentile(dist.sorted, v ?? 0);
-      const isEnd = i === 0 || i === route.stations.length - 1;
-      const isTransfer = route.transferStations.includes(n);
+      let role = null;
+      if (i === 0) role = ROLE.board;
+      else if (i === route.stations.length - 1) role = ROLE.alight;
+      else if (route.transferStations.includes(n)) role = ROLE.transfer;
+
       L.circleMarker([S[n].lat, S[n].lng], {
-        radius: isEnd ? 8 : isTransfer ? 7 : 5,
-        color: "#222",
-        weight: isEnd || isTransfer ? 2 : 1,
+        radius: role ? 10 : 5,
+        color: role ? role.color : "#555",
+        weight: role ? 4 : 1,
         fillColor: typeof v === "number" ? colorForP(p) : "#bbb",
         fillOpacity: 0.95,
       })
         .bindTooltip(
-          `<b>${n}</b><br/>노인 비중 ${
+          `<b>${n}</b>${role ? ` · ${role.ko}` : ""}<br/>노인 비중 ${
             typeof v === "number" ? v.toFixed(1) + "%" : "-"
           }<br/>상위 ${typeof v === "number" ? topPercent(p) : "-"}%`,
           { direction: "top" }
         )
         .addTo(layer);
+
+      // 승차·환승·하차역은 항상 보이는 라벨 표시
+      if (role) {
+        L.tooltip({
+          permanent: true,
+          direction: "top",
+          offset: [0, -10],
+          className: `roleLabel ${role.cls}`,
+        })
+          .setLatLng([S[n].lat, S[n].lng])
+          .setContent(`${role.ko} · ${n}`)
+          .addTo(layer);
+      }
     });
 
     mapRef.current.fitBounds(L.latLngBounds(latlngs).pad(0.2));

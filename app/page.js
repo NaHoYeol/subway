@@ -186,18 +186,18 @@ export default function Page() {
 
           <figure className={styles.figure}>
             <Image
-              src="/hourly-profile.png"
-              alt="시간대별 노인·비노인 지하철 이용 인원 곡선"
-              width={702}
-              height={334}
+              src="/hourly-usage.png"
+              alt="시간대별 승차·하차 평균 이용 인원 — 노인 vs 비노인"
+              width={720}
+              height={246}
               sizes="(max-width: 720px) 100vw, 720px"
               className={styles.figureImg}
             />
             <figcaption className={styles.caption}>
-              시간대별 노인(파랑)·비노인(주황) 지하철 이용 인원. 비노인은 오전
-              8시·오후 6시 출퇴근 시간대에 뚜렷한 봉우리를 보이는 반면, 노인은
-              낮 시간대(10~16시)에 완만하게 분포한다. (자료: 서울교통공사
-              2024년 시간대별 승하차 인원)
+              시간대별 평균 승차(왼쪽)·하차(오른쪽) 이용 인원. 비노인(초록)은
+              출근 하차 8시·퇴근 승차 18시에 뚜렷한 봉우리를 보이는 반면,
+              노인(빨강)은 출퇴근을 피한 낮 시간(15시 전후)에 완만하게 분포한다.
+              (자료: 서울교통공사 2024년 시간대별 승하차 인원)
             </figcaption>
           </figure>
 
@@ -313,6 +313,20 @@ export default function Page() {
           <h2 className={styles.h2}>
             실제로는 본 적 없는 ‘지하철 노인 빌런’, 괜한 일반화일 수도…
           </h2>
+
+          <figure className={styles.figure}>
+            <Image
+              src="/ai-elderly-subway.png"
+              alt="지하철 노약자석에 앉아 웃고 있는 노부부 일러스트"
+              width={1024}
+              height={558}
+              sizes="(max-width: 720px) 100vw, 720px"
+              className={styles.figureImg}
+            />
+            <figcaption className={styles.caption}>
+              기사의 이해를 돕기 위한 AI 생성 이미지.
+            </figcaption>
+          </figure>
 
           <p>
             그렇다면 왜 우리 사회에서는 잘못 없는 노인 세대를 혐오하는 현상이
