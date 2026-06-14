@@ -22,6 +22,7 @@ export default function Page() {
             서울 지하철 노령층의 이동과 체류,
             <br />그 실태를 추적하다
           </h1>
+          <p className={styles.heroCaption}>2026.06.14 작성</p>
         </div>
       </header>
 
